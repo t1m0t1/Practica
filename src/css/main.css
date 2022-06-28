@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+ 
+:root{
+    --primary-color: rgba(246, 246, 246, 0.686);
+    --secondary-color: rgb(61, 68, 73);
+    --highlight-color: blue;
+
+    --status-alto-color: green;
+    --status-medio-color: yellow;
+    --status-bajo-color: red;
+
+    --e-pading: 12px;
+    --e-pading-s: 6px;
+    --e-pading-xs: 2px;
+
+    --tb-borde-radius: 3px;
+
+    --backgraund-color-container: #2a3338;
+    --border-color: var(--secondary-color);
+    --bg-color: var(--highlight-color);
+    --text-color:var(--primary-color);
+    --bg-active-button:var(--highlight-color);
+    --text-color-button:var(--primary-color);
+    --text-color-active-button:var(--primary-color);
+    --hover-cell-color:var(--highlight-color);
+    --even-row-color:var(--secondary-color);
+    --focus-color:var(--highlight-color);
+    --input-bg-color:var(--secondary-color);
+    --input-color:var(--primary-color);
+}
+
+.material-icons{
+    font-size: 25px;
+}
+
+.datatable-container{
+    font-family:Arial, Helvetica, sans-serif;
+/*     background-color: var(--backgraund-color-container); */
+    border-radius: var(--tb-borde-radius);
+/*     color: var(--text-color); */
+    width: 100%;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.datatable-container .header-tools{
+    border-bottom: solid 1px var(--border-color);
+    padding: var(--e-pading);
+    display: flex;
+    align-items: baseline;
+}
+
+.datatable-container .header-tools .search{
+    width: 38%;
+}
+
+.datatable-container .header-tools .search .search-input{
+    width: 50%;
+    margin-left: auto;
+/*     background-color: var(--input-bg-color); */
+    display: block;
+    box-sizing: border-box;
+    border-radius: var(--tb-borde-radius);
+    border: solid 1px var(--border-color);
+/*     color: var(--input-color); */
+}
+
+.datatable-container .header-tools .tools{
+    width: 78%;
+}
+
+.datatable-container .header-tools .tools ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+}
+
+.datatable-container .header-tools .tools ul li{
+    display: inline-block;
+    margin: 0 var(--e-pading-xs);
+    align-items: baseline;
+}
+
+.datatable-container .footer-tools{
+    padding: var(--e-pading);
+    display: flex;
+    align-items: baseline;
+}
+
+.datatable-container .footer-tools .list-items{
+    width: 50%;
+}
+
+.datatable-container .footer-tools .pages{
+    margin-left: auto;
+    margin-right: 0;
+    width: 50%;
+}
+
+.datatable-container .footer-tools .pages ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+.datatable-container .footer-tools .pages ul li{
+    display: inline-block;
+    margin: 0 var(--e-pading-xs);
+}
+
+.datatable-container .footer-tools .pages ul li button,
+.datatable-container .header-tools .tools ul li button{
+/*     color: var(--text-color-button); */
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: var(--tb-borde-radius);
+    background: transparent;
+    cursor: pointer;
+}
+
+.datatable-container .footer-tools .pages ul li button:hover,
+.datatable-container .header-tools .tools ul li button:hover{
+    background: var(--bg-active-button);
+/*     color: var(--text-color-active-button); */
+}
+
+.formulario{
+    margin-left: 35%;
+    text-align: center;
+}

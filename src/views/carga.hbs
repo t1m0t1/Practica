@@ -1,0 +1,84 @@
+<div class="bg-secondary bg-gradient mt-4 pb-3"> 
+    <h1 class="text-center ">alta de producto</h1>
+
+
+    <div class="ms-4 me-4">
+
+          <div class="mt-5 mb-4  ">
+
+             <form method="POST" action="/create/articulo" > 
+ 
+             <div class="row">
+                 <div class="col-md-3">
+                 <label class="col-md-2" for="nombre">Nombre</label>
+                 <input type="text" class="form-control col-md-4" name="nombre" id="nombre" required>
+                 </div>
+ 
+                 <div class="col-md-3">   
+                     <label class="col-md-2" for="categoria">Categoria</label>
+                     <select class="form-control col-md-4" name="categoria" id="categoria" required>
+                         <option value="-1" selected></option>
+                         <option value="0">Informatica</option>
+                         <option value="1">Comestible</option>
+                         <option value="2">Limpieza</option>
+                     </select>
+ 
+                 </div>
+ 
+                 <div class="col-md-3">    
+                     <label for="cantidad">Cantidad</label>
+                     <input type="number" class="form-control" name="cantidad" id="cantidad" required>
+                 </div>
+                 <div class="col-md-3">
+                     <label for="reposicion">Punto de Reposicion</label>
+                     <input type="number" class="form-control" name="reposicion" id="reposicion" required> 
+                 </div>
+                 <button type="submit" class="btn btn-dark mt-4">cargar</button>
+
+
+
+
+                    
+
+             </div>
+             </form>
+             </div>
+ 
+ 
+
+            <div>
+             <div class="tb-tools">
+             <button class="btn btn-dark mt-5 mb-4" id="btnFormulario" onclick="MostrarOcultar()">Ocultar</button>
+                                             <!-- Tabla -->
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                        <!-- Tabla -->
+                                <table id="myTable" class="table table-secondary table-striped">
+                    <thead>
+                        <tr class="table-dark bg-gradient ">
+
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Punto de Reposicion</th>
+                        </tr>
+                    </thead>
+
+                    {{>tabla}}
+
+                    </table>
+            </div>
+        </div>
+    </div>
+                                     </div >
+     
+ 
+                 </div>
+        </div>
+
+
+    </div>

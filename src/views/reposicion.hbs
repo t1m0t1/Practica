@@ -1,0 +1,52 @@
+{{>navegacion}}
+
+<div class="container-fluid">
+  <div class="row">
+                                                {{!-- Contenedor de tabla --}}
+<div class="col table-resposive">
+                                <table id="myTable" class="table table-dark table-striped">
+                    <thead>
+                        <tr class="table-dark ">
+
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Punto de Reposicion</th>
+                        <th scope="col">Accion</th>
+                        </tr>
+                    </thead>
+
+                    {{>tablaRepo}}
+
+                    </table>
+</div>
+{{!-- Contenedor de la lista --}}
+<div class="col-5 table-responsive pt-4 mt-5">
+<table class="table table-dark table-striped mt-2">
+        <thead>
+                 <tr class="table-dark ">
+
+                 <th scope="col">ID</th>
+                 <th scope="col">Nombre</th> 
+                 <th scope="col">Cantidad</th>
+
+                </tr>
+            </thead>
+
+</table>
+         <button>Confirmar</button>
+</div>
+</div>  
+</div>
+
+
+                <script>
+                    const arrArticulos = {{{json articulo}}};
+                    const pedido=[];
+                    const addArticulos = (key) =>{
+
+                        pedido.push(arrArticulos[key]);
+                        console.log (pedido);
+                    }
+                </script>

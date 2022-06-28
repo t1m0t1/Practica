@@ -1,0 +1,76 @@
+:root{
+    --primary-color: rgba(246, 246, 246, 0.686);
+    --secondary-color: rgb(61, 68, 73);
+    --highlight-color: blue;
+
+    --status-alto-color: green;
+    --status-medio-color: yellow;
+    --status-bajo-color: red;
+
+    --e-pading: 12px;
+    --e-pading-s: 6px;
+    --e-pading-xs: 2px;
+
+    --tb-borde-radius: 3px;
+
+    --backgraund-color-container: #2a3338;
+    --border-color: var(--secondary-color);
+    --bg-color: var(--highlight-color);
+    --text-color:var(--primary-color);
+    --bg-active-button:var(--highlight-color);
+    --text-color-button:var(--primary-color);
+    --text-color-active-button:var(--primary-color);
+    --hover-cell-color:var(--highlight-color);
+    --even-row-color:var(--secondary-color);
+    --focus-color:var(--highlight-color);
+    --input-bg-color:var(--secondary-color);
+    --input-color:var(--primary-color);
+}
+
+.container{
+    background-color: var(--backgraund-color-container);
+    border-radius: var(--tb-borde-radius);
+    color: var(--text-color);
+    width: 100%;
+    height: 650px;
+    margin: 0 auto;
+    font-size: 12px;
+
+}
+
+h1{
+    text-align: center;
+    padding-top: 25px;
+}
+
+.container .header-tools {
+    width: 38%;
+    margin-left: 90%;
+}
+
+.container .formulario{
+    width: 100%;
+
+}
+
+.container .tb-tools{
+    margin-top: 25%;
+}
+
+.container .tb-tools button{
+    margin-left: 90%;
+}
+
+.datatable{
+    font-size: 15px;
+
+}
+
+.datatable td{
+    padding-right: 200px;
+
+}
+
+.it-fm{
+    border-radius: 8px;
+}

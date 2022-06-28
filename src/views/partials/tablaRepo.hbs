@@ -1,0 +1,18 @@
+               
+                <tbody>
+                    {{#each articulo}}
+                        
+                     <tr class="">
+                        <th scope="row">{{id_articulo}}</th>
+                        <td> {{nombre_articulo}} </td>
+                        <td> {{categoria_articulo}} </td>
+                        <td> {{cantidad}} </td>
+                        <td> {{punto_reposicion}} </td>
+                        <td>
+                            <input class="col-3" type="number" name="cantidad" id=""> 
+                            <a class="btn btn-sm btn-outline-succes text-light" onclick="addArticulos({{@key}})">Agregar</a> </td>
+
+                        </tr>
+                    {{/each}}
+                </tbody>
+

@@ -1,0 +1,91 @@
+
+
+<!--div que contenga una tabla con los campos
+    fecha de carga  Nombre  Cantidad    Area    Responsable
+-->
+<!--Para filtra por
+Area    Responsable     Fecha de carga
+-->
+<!--Buscador por nombre de producto-->
+<!-- -->
+<div class="datatable-container bg-black border-dark">
+    <div class="header-tools bg-secondary bg-gradient">
+        <div></div>
+        <div class="search ms-auto">
+            <input type="text" class="search-input ">
+        </div>
+    </div>
+
+    <table class="table table-dark">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">Fecha de carga</th>
+                <th scope="col">Area</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Detalle</th>
+                <!-- Boton que despliegue una ventana con info del movimiento -->
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="table-success">
+                
+                <span class="alto"></span></td>                 
+                
+                <td>15/05/2022</td>
+                <td>Personal</td>
+                <td>Manolo</td>
+                <td><button class="btn-dark">detalle <!-- Icno de hoja de papel --></button></td>
+
+            </tr>
+
+            <tr class="table-warning">
+                <td>10/04/2022</td>
+                <td>Tramites</td>
+                <td>Miguel</td>
+                <td><button class="btn-dark">detalle <!-- Icno de hoja de papel --></button></td>
+
+            </tr>
+            <tr class="table-danger">
+                <td>20/03/2022</td>
+                <td>Legales</td>
+                <td>Virginia</td>
+                <td><button class="btn-dark">detalle <!-- Icno de hoja de papel --></button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+<div class="footer-tools bg-secondary bg-gradient">
+        <div class="list-items text-light">
+            mostrar
+            <select name="entries" class="entries">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="15" >15</option>
+            </select>
+            entradas
+        </div>
+
+        <div class="ms-auto">
+            <nav class="" aria-label="Page navigation example">
+                <ul class="pagination ">
+                  <li class="page-item ">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+                  <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+        </div>
+       
+
+           
+    </div>
+   
+
+    </div>
+</div>
