@@ -1,53 +1,71 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-/* const pool = require('../database'); */
-const helpers = require('./helpers');
+const conexion  = require ('../js/conexion_slq');
+const bodyParser = require('body-parser');
+const helpers = require('../lib/helpers');
 
+/* Ingreso */
 passport.use('local.signin', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
   passReqToCallback: true
-},
- async (req, username, password, done) => {
-  const rows = await pool.query('SELECT * FROM usuario WHERE dni = ?', [username]);
+}, async (req, username, password, done) => {
+  const rows = await conexion.query('SELECT * FROM usuario WHERE username = ?', [username]);
+
   if (rows.length > 0) {
     const user = rows[0];
+
     const validPassword = await helpers.matchPassword(password, user.password)
+    
     if (validPassword) {
-      done(null, user, req.flash('success', 'Bienvenido ' + user.username));
+      done(null, user, req.flash('success', 'Welcome ' + user.username));
     } else {
-      done(null, false, req.flash('message', 'Contraseña incorrecta'));
+
+      done(null, false, req.flash('message', 'Incorrect Password'));
     }
   } else {
-    return done(null, false, req.flash('message', 'El usuario no existe.'));
+    return done(null, false, req.flash('message', 'The Username does not exists.'));
   }
 }));
 
+
+/* Registro */
 passport.use('local.signup', new LocalStrategy({
-  usernameField: 'username',
+  usernameField:'username',
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
 
-  const { fullname } = req.body;
+ /*  const user = req.body; */
   let newUser = {
-    fullname,
     username,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    area: req.body.area,
     password
   };
+
+  console.log(newUser)
   newUser.password = await helpers.encryptPassword(password);
+  
   // Saving in the Database
-  const result = await pool.query('INSERT INTO usuario SET ? ', newUser);
+  const result = await conexion.query('INSERT INTO usuario SET ? ', newUser);
   newUser.id = result.insertId;
   return done(null, newUser);
 }));
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
 
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+
 passport.deserializeUser(async (id, done) => {
-  const rows = await pool.query('SELECT * FROM usuario WHERE id = ?', [id]);
+  const rows = await conexion.query('SELECT * FROM usuario WHERE id_usuario = ?', [id]);
   done(null, rows[0]);
 });
+module.exports = passport;

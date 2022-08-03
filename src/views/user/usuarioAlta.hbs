@@ -4,49 +4,49 @@
 
             <div class="row  justify-content-center align-items-center">
                 <div class="col-sm-4">
-                    <form class=" pt-5" action="">
+                    <form class=" pt-5" action="/user/usuarioAlta" method="post">
 
                         <div class="col-auto">
             
                                 <div class="col-auto">
                                     <label class="form-label text-light" for="">Nombre</label>
-                                    <input class="form-control" type="text">
+                                    <input name="nombre" class="form-control" type="text">
                                 </div>
 
                                 <div class="col-auto">
                                     <label class="form-label text-light" for="">Apellido</label>
-                                    <input class="form-control" type="text">
+                                    <input name="apellido" class="form-control" type="text">
                                 </div>
             
                             <div class="col-auto">
                                 <label class="col-md-5 text-light" for="">Area</label>
-                                <select class="form-control col-md-4" name="" id="">
-                                    <option value="" selected>Seleccionar</option>
-                                    <option value="">Comunicacion</option>
-                                    <option value="">Contable</option>
-                                    <option value="">Sistema</option>
+                                <select class="form-control col-md-4" name="area" id="">
+                                    <option value="null" selected>Seleccionar</option>
+                                    <option value="comunicacion">Comunicacion</option>
+                                    <option value="contable">Contable</option>
+                                    <option value="1">Sistema</option>
                                 </select>
                             </div>
             
                             <div class="col-auto">
                                 <label class="col-md-5 text-light" for="">Usuario</label>
-                                <input class="form-control col-md-4" type="text">
+                                <input name="username" class="form-control col-md-4" type="text">
                             </div>
             
                             <div class="col-auto">
                                 <!-- Poner campo contraseña en BD -->
                                 <label class="col-md-5 text-light" for="">Contraseña</label>
-                                <input class="form-control col-md-4" type="text">
+                                <input name="password" class="form-control col-md-4" type="password">
                             </div>
             
                             <div class="col-auto">
                                 <label class="text-light" for="">Confirmar contraseña</label>
-                                <input class="form-control col-md-4" type="text">
+                                <input class="form-control col-md-4" type="password">
                             </div>
                             <!-- botones -->
                             <div class="pb-5">
                                 <button class="btn btn-dark mt-4 me-3">Cancelar</button>
-                                <button class="btn btn-dark mt-4 ms-auto">Confirmar</button>
+                                <button type="submit" class="btn btn-dark mt-4 ms-auto">Confirmar</button>
             
                             </div>
 

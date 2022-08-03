@@ -19,9 +19,6 @@ router.get('/create', async(req,res)=> {
    
 });
 
-router.get('/usuarios.html', (req,res)=> {
-    res.sendFile(path.resolve(__dirname, '../views/usuarios.html'));
-});
 
 router.get('/historialcarga.html', (req,res)=> {
     res.sendFile(path.resolve(__dirname, '../views/historialcarga.html'));
@@ -30,12 +27,14 @@ router.get('/historialcarga.html', (req,res)=> {
 //SCRIPTS
 
 //----------------------------------------Inicio (Mostrar articulos)----------------------------------------//
-router.get('/', async(req,res)=>{
-   const articulo =await conexion.query('SELECT * FROM articulo'
-   );
 
-   res.render('inicio.hbs',{articulo: articulo});
+router.get('/inicio', async(req,res)=>{
+    const articulo =await conexion.query('SELECT * FROM articulo'
+    );
+   
+    res.render('inicio',{articulo: articulo});
 });
+
 
 //----------------------------------------Metodo insertar----------------------------------------//
 
@@ -45,6 +44,7 @@ router.get('/reposicion/articulo', async(req,res)=>{
 
     res.render('reposicion.hbs', {articulo: articulo});
 });
+
 
 router.post('/create/articulo', async(req,res)=>{
     
