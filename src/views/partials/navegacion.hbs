@@ -1,48 +1,53 @@
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+        
         <div class="dv-nav">
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-secondary bg-gradient">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
                 <div class="container-fluid">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="show/articulo" class="nav-link active">Inicio</a>
+                            <a href="/inicio" class="nav-link active">Inicio</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Carga</a>
-                        <div class="dropdown-menu">
+                        <li class="nav-item dropdown" id="h-carga">
+                            <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ingreso</a>
+                    <div class="dropdown-menu" >
                         <a href="/create" class="dropdown-item">Alta de producto</a>
                         <a href="/reposicion/articulo" class="dropdown-item">Reposicion</a>
                     </div>
 
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Salida</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a href=""  class="nav-link" href="#">Areas</a>
-                        </li>
-
-
-
                              <li class="nav-item dropdown">
                                     <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historial</a>
                                 <div class="dropdown-menu">
-                                <a href="historialcarga.html" class="dropdown-item">Historial de Carga</a>
-                                <a href="" class="dropdown-item">Historial de Salida</a>
+                                <a href="/historial/carga" class="dropdown-item">Historial de Ingresos</a>
+                                <a href="" class="dropdown-item">Historial de Pedidos</a>
 
                                 </div>
 
                              </li>
 
-                             <li class=" nav-item dropdown">
+                             <li class=" nav-item dropdown" id="h-usuario">
                                 <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuario</a>
                             <div class="dropdown-menu">
                             <a href="/user/usuarioAlta" class="dropdown-item">Alta de usuario</a>
-                            <a href="/usuario/administracion" class="dropdown-item">Administrar usuario</a>
+                            <a href="/usuario" class="dropdown-item">Administrar usuario</a>
                         </div>
+                         </li>
+
+                            <li class=" nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pedidos</a>
+                            <div class="dropdown-menu">
+                            <a href="/pedido" class="dropdown-item">Estado de pedido</a>
+                            <a href="/pedidoUsuario" class="dropdown-item">Realizar pedido</a>
+                        </div>
+                         </li>
                         
                             </ul>
+                            <h5 class="text-light me-3 pe-5">Bienvenido {{user.apellido}} {{user.nombre}}</h5>
+                            
+                            
                             <a href="/logout">Salir</a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -51,3 +56,18 @@
                         </nav>    
         </div> 
    
+
+
+<script>
+    
+ $(document).ready( function () {
+
+     switch ({{user.rol}}){
+        case 1:
+        let option= document.getElementById("h-usuario");
+        option.remove();
+        break;
+        case 3: 
+    }
+} );
+</script>

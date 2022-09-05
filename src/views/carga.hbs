@@ -1,4 +1,5 @@
-<div class="bg-secondary bg-gradient mt-4 pb-3"> 
+{{>navegacion}}
+<div class="rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;"> 
     <h1 class="text-center ">alta de producto</h1>
 
 
@@ -21,17 +22,19 @@
                          <option value="0">Informatica</option>
                          <option value="1">Comestible</option>
                          <option value="2">Limpieza</option>
+                         <option value="3">Papeleria</option>
+                         <option value="4">Libreria</option>
                      </select>
  
                  </div>
  
                  <div class="col-md-3">    
                      <label for="cantidad">Cantidad</label>
-                     <input type="number" class="form-control" name="cantidad" id="cantidad" required>
+                     <input type="number" min="0" class="form-control" name="cantidad" id="cantidad" required>
                  </div>
                  <div class="col-md-3">
                      <label for="reposicion">Punto de Reposicion</label>
-                     <input type="number" class="form-control" name="reposicion" id="reposicion" required> 
+                     <input type="number" min="0" class="form-control" name="reposicion" id="reposicion" required> 
                  </div>
                  <button type="submit" class="btn btn-dark mt-4">cargar</button>
 
@@ -48,13 +51,13 @@
 
             <div>
              <div class="tb-tools">
-             <button class="btn btn-dark mt-5 mb-4" id="btnFormulario" onclick="MostrarOcultar()">Ocultar</button>
+             <button class="btn btn-dark mt-5 mb-4" id="btnTabla" onclick="MostrarOcultar()">Mostrar</button>
                                              <!-- Tabla -->
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="dv-table" hidden>
         <div class="row">
-            <div class="col">
+            <div class="col" >
                         <!-- Tabla -->
                                 <table id="myTable" class="table table-secondary table-striped">
                     <thead>
@@ -82,3 +85,20 @@
 
 
     </div>
+<script>
+    function MostrarOcultar(){
+    let boton = document.getElementById("btnTabla");
+    let tabla = document.getElementById("dv-table");
+    
+    
+
+    if(tabla.hidden){
+        tabla.hidden = false;
+
+        boton.innerHTML="Ocultar"
+    }else{
+        tabla.hidden = true;
+        boton.innerHTML="Mostrar"
+    }
+}
+</script>
