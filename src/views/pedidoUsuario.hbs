@@ -1,74 +1,65 @@
 {{>navegacion}}
 
- 
-
-<div class="rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;">
-  <div class="row">
+<div class="container-fluid bg-secondary bg-gradient ">
+  <div class="row"><h3 class=" text-center ">Pedido</h3>
                                                 {{!-- Contenedor de tabla --}}
-<div class="col table-resposive ms-3">
+<div class="col table-resposive">
                                 <table id="myTable" class="table table-dark table-striped">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr class="table-dark ">
 
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Categoria</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Punto de Reposicion</th>
-                        <th scope="col">Accion</th>
+                        <th scope="col">Catidad &nbsp; Accion</th>
                         </tr>
                     </thead>
-
                                        {{#each articulo}}
                         
                      <tr class="">
-                        <th scope="row">{{id_articulo}}</th>
+                        <td> {{id_articulo}} </td>
                         <td> {{nombre_articulo}} </td>
                         <td> {{categoria_articulo}} </td>
-                        <td> {{cantidad}} </td>
-                        <td> {{punto_reposicion}} </td>
+                        
                         <td>
-                            <input class="col-3" type="number" min="0" name="cantidad-agregar" id="cantidad-agregar{{@key}}" > 
+                            <input class="col-3" type="number" name="cantidad-agregar" id="cantidad-agregar{{@key}}" > 
                             <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar" 
                             onclick="addArticulos({{ @key }})">Agregar</a>
-
                         </td>
 
                         </tr>
                     {{/each}}
-
                     </table>
 </div>
 {{!-- Contenedor de la lista --}}
-<div class="col-5 table-responsive pt-4 mt-5 me-3">
+<div class="col-5 table-responsive pt-4 mt-5">
 <table class="table table-dark table-striped mt-2">
         <thead>
                  <tr class="table-dark ">
 
-                 <th scope="col">ID</th>
+                 <th scope="col">ID</th> 
                  <th scope="col">Nombre</th> 
-                 <th scope="col">Cantidad</th> 
-                 <th scope="col"></th> 
+                 <th scope="col">Cantidad</th>
+
                 </tr>
             </thead>
             <tbody id="contenido-tabla">
-                    {{!-- Lista de elementos a añadir mediante
-                    funcion addArticulos --}}
-            </tbody>
 
+            </tbody>
 </table>
-        <form action="/reposicion/articulo" method="POST">
+
+            <form action="/pedidoUsuario" method="POST">
             <input type="hidden" value="" name="pedidos" id="pedidos">
         
         <button type="submit" onclick="confirmar()">Confirmar</button>
         </form>
-         
+
 </div>
 </div>  
 </div>
 
 
-          <script>
+                 <script>
             
          const arrArticulos = {{{json articulo}}};
         
@@ -88,6 +79,7 @@
                 console.log(cantidad);
 
             
+                {{!-- buscar valor mediante @key --}}
                  
 
                 const pedido= {
@@ -113,8 +105,6 @@
                 <td>${pedidos[i].id}</td>
                 <td>${pedidos[i].nombre}</td>
                 <td>${pedidos[i].cantidad}</td>
-                <td><a class="btn btn-sm btn-outline-succes text-light" id="boton-borrar" 
-                            onclick="borrarArticulos(${key})">Borrar</a></td>
             </tr>
             `
 
@@ -137,17 +127,6 @@
             }
          }
 
-            const borrarArticulos= (key)=>{
-                for (let i=0; i<pedidos.length; i++){
-                    if ( i == key ){
-                        pedidos[i]= {};
-
-                    }
-                for (let i=0; i<pedidos.length; i++){
-                    console.log(pedidos[i])
-                }
-                }
-            }
         
         
-                </script>     
+                </script>

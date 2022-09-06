@@ -17,7 +17,7 @@ helpers.matchPassword = async (password, savedPassword) => {
 };
 
 helpers.colorEstado =    (cantidad , reposicion)=> {if (cantidad > reposicion) {return "table-success";
-}else if (cantidad <= (reposicion+2)&& cantidad >= reposicion){
+}else if (cantidad <= (reposicion+2) && cantidad >= reposicion){
     return "table-warnig";
 }else{
      return "table-danger"

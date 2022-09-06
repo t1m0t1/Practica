@@ -25,8 +25,7 @@ require('./lib/passport');
 
 //----------------------------------------configuraciones----------------------------------------//
 app.set("port", process.env.PORT || 4000);
-//----------------------------------------publico----------------------------------------//
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 //----------------------------------------motor de plantillas----------------------------------------//
 app.set('views', path.join(__dirname, 'views'));
@@ -39,9 +38,13 @@ app.engine('.hbs', engine({
   }))
 app.set('view engine', '.hbs');
 
+
+//----------------------------------------publico----------------------------------------//
+app.use(express.static(path.join(__dirname, 'src/public')));
+
 //----------------------------------------Middlewares----------------------------------------//
 app.use(session({
-  secret: 'faztmysqlnodemysql',
+  secret: 'SeMamoElMan',
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore(database)

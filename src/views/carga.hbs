@@ -1,4 +1,5 @@
-<div class="bg-secondary bg-gradient mt-4 pb-3"> 
+{{>navegacion}}
+<div class="rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;"> 
     <h1 class="text-center ">alta de producto</h1>
 
 
@@ -21,6 +22,8 @@
                          <option value="0">Informatica</option>
                          <option value="1">Comestible</option>
                          <option value="2">Limpieza</option>
+                         <option value="3">Papeleria</option>
+                         <option value="4">Libreria</option>
                      </select>
  
                  </div>
@@ -52,9 +55,9 @@
                                              <!-- Tabla -->
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="dv-table">
         <div class="row">
-            <div class="col">
+            <div class="col" >
                         <!-- Tabla -->
                                 <table id="myTable" class="table table-secondary table-striped">
                     <thead>
@@ -82,3 +85,14 @@
 
 
     </div>
+<script>
+    function MostrarOcultar(){
+    let tabla = document.getElementById("dv-table");
+    
+    if(tabla.hidden){
+        tabla.hidden = false;
+    }else{
+        tabla.hidden = true;
+    }
+}
+</script>
