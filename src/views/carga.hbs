@@ -1,40 +1,53 @@
 {{>navegacion}}
-<div class="rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;"> 
-    <h1 class="text-center ">alta de producto</h1>
+<div class="mt-5 mb-4 rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;"> 
 
 
     <div class="ms-4 me-4">
 
           <div class="mt-5 mb-4  ">
+             <div class="container">
 
+            <div class="row  justify-content-center align-items-center">
+                <div class="col-sm-4">
+    <h1 class="text-center text-light ">alta de producto</h1>
              <form method="POST" action="/create/articulo" > 
  
-             <div class="row">
-                 <div class="col-md-3">
+             <div class="col-auto">
+                 <div class="col-auto">
                  <label class="col-md-2" for="nombre">Nombre</label>
                  <input type="text" class="form-control col-md-4" name="nombre" id="nombre" required>
                  </div>
  
-                 <div class="col-md-3">   
+                 <div class="col-auto">   
                      <label class="col-md-2" for="categoria">Categoria</label>
                      <select class="form-control col-md-4" name="categoria" id="categoria" required>
                          <option value="-1" selected></option>
-                         <option value="0">Informatica</option>
-                         <option value="1">Comestible</option>
-                         <option value="2">Limpieza</option>
-                         <option value="3">Papeleria</option>
-                         <option value="4">Libreria</option>
+                         <option value="1">Informatica</option>
+                         <option value="2">Comestible</option>
+                         <option value="3">Limpieza</option>
+                         <option value="4">Limpieza lts</option>
+                         <option value="5">Papeleria</option>
+                         <option value="6">Libreria</option>
                      </select>
  
                  </div>
+                 <div class="col-auto">
+                                <label class="col-md-5 text-light" for="">Sector</label>
+                                <select class="form-control col-md-4" name="sector" id="">
+                                    <option value="null" selected>Seleccionar</option>
+                                    <option value="1">Contable</option>
+                                    <option value="2">Sistemas</option>
+                                    <option value="3">Limpieza</option>
+                                </select>
+                            </div>
  
-                 <div class="col-md-3">    
+                 <div class="col-auto">    
                      <label for="cantidad">Cantidad</label>
-                     <input type="number" class="form-control" name="cantidad" id="cantidad" required>
+                     <input type="number" min="0" class="form-control" name="cantidad" id="cantidad" required>
                  </div>
-                 <div class="col-md-3">
+                 <div class="col-auto">
                      <label for="reposicion">Punto de Reposicion</label>
-                     <input type="number" class="form-control" name="reposicion" id="reposicion" required> 
+                     <input type="number" min="0" class="form-control" name="reposicion" id="reposicion" required> 
                  </div>
                  <button type="submit" class="btn btn-dark mt-4">cargar</button>
 
@@ -45,17 +58,24 @@
 
              </div>
              </form>
-             </div>
- 
- 
+                        </div>
+                     </div>
+                 </div>
+                <div>     
+            </div>
+        </div>
+    </div>
+</div>
 
-            <div>
-             <div class="tb-tools">
-             <button class="btn btn-dark mt-5 mb-4" id="btnFormulario" onclick="MostrarOcultar()">Ocultar</button>
+    <div class="ms-4 me-4">
+
+          <div class="mt-5 mb-4  ">
+<div class="tb-tools">
+             <button class="btn btn-dark mt-5 mb-4" id="btnTabla" onclick="MostrarOcultar()">Mostrar</button>
                                              <!-- Tabla -->
 
 
-    <div class="container-fluid" id="dv-table">
+    <div class="container-fluid" id="dv-table" hidden>
         <div class="row">
             <div class="col" >
                         <!-- Tabla -->
@@ -67,6 +87,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Sector</th>
                         <th scope="col">Punto de Reposicion</th>
                         </tr>
                     </thead>
@@ -78,21 +99,22 @@
         </div>
     </div>
                                      </div >
-     
- 
-                 </div>
-        </div>
-
-
+                </div>
     </div>
 <script>
     function MostrarOcultar(){
+    let boton = document.getElementById("btnTabla");
     let tabla = document.getElementById("dv-table");
     
+    
+
     if(tabla.hidden){
         tabla.hidden = false;
+
+        boton.innerHTML="Ocultar"
     }else{
         tabla.hidden = true;
+        boton.innerHTML="Mostrar"
     }
 }
 </script>

@@ -22,7 +22,7 @@
                         <td> {{categoria_articulo}} </td>
                         
                         <td>
-                            <input class="col-3" type="number" name="cantidad-agregar" id="cantidad-agregar{{@key}}" > 
+                            <input class="col-3" min="0" type="number" name="cantidad-agregar" id="cantidad-agregar{{@key}}" > 
                             <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar" 
                             onclick="addArticulos({{ @key }})">Agregar</a>
                         </td>

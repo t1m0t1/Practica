@@ -1,7 +1,7 @@
 {{>navegacion}}
     <div class="mt-5 mb-4 rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;">
         <div class="container">
-
+                <h3 class="text-center">Alta de Usuario</h3>
             <div class="row  justify-content-center align-items-center">
                 <div class="col-sm-4">
                     <form class=" pt-5" action="/user/usuarioAlta" method="post">
@@ -27,6 +27,7 @@
                                     <option value="1">Sistema</option>
                                 </select>
                             </div>
+                            
                             <div class="col-auto">
                                 <label class="col-md-5 text-light" for="">Rol</label>
                                 <select class="form-control col-md-4" name="rol" id="">
@@ -40,7 +41,7 @@
                             </div>            
                             <div class="col-auto">
                                 <label class="col-md-5 text-light" for="">Usuario</label>
-                                <input name="username" class="form-control col-md-4" type="text">
+                                <input name="username"  minlength="7" maxlength="8" class="form-control col-md-4" type="text">
                             </div>
             
                             <div class="col-auto">

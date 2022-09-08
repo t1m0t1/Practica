@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+ 
+:root{
+    --color-primario:linear-gradient(to top , rgb(17, 0, 116),rgb(0, 0, 0));
+    --color-secundario: linear-gradient(to top , rgb(187, 3, 3),rgb(145, 1, 1));
+    --color-acento: rgba(251, 255, 5, 0.89);
+
+    --e-pading: 12px;
+    --e-pading-s: 6px;
+    --e-pading-xs: 2px;
+
+    --tb-borde-radius: 3px;
+
+    --backgraund-color-container: #2a3338;
+    --border-color: var(--secondary-color);
+    --bg-color: var(--highlight-color);
+    --text-color:var(--primary-color);
+    --bg-active-button:var(--highlight-color);
+    --text-color-button:var(--primary-color);
+    --text-color-active-button:var(--primary-color);
+    --hover-cell-color:var(--highlight-color);
+    --even-row-color:var(--secondary-color);
+    --focus-color:var(--highlight-color);
+    --input-bg-color:var(--secondary-color);
+    --input-color:var(--primary-color);
+}
+
+.boton-primario{
+    background-color: blue;
+}
+
+.contenedor{
+    background-color:var(--color-acento);
+}
+
+.navbar{
+    background: var(--color-primario);
+}

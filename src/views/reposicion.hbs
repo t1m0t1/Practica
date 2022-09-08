@@ -14,6 +14,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Sector</th>
                         <th scope="col">Punto de Reposicion</th>
                         <th scope="col">Accion</th>
                         </tr>
@@ -24,8 +25,9 @@
                      <tr class="">
                         <th scope="row">{{id_articulo}}</th>
                         <td> {{nombre_articulo}} </td>
-                        <td> {{categoria_articulo}} </td>
+                        <td> {{nombre}} </td>
                         <td> {{cantidad}} </td>
+                        <td> {{nombre_sector}} </td>
                         <td> {{punto_reposicion}} </td>
                         <td>
                             <input class="col-3" type="number" min="0" name="cantidad-agregar" id="cantidad-agregar{{@key}}" > 
@@ -107,19 +109,21 @@
                 tabla.innerHTML= '';
         
         for (let i=0; i<pedidos.length; i++) {
-            tabla.innerHTML += 
+            if (pedidos[i].id != undefined){
+                            tabla.innerHTML += 
             `  
-            <tr>
+            <tr id="tr-${i}">
                 <td>${pedidos[i].id}</td>
                 <td>${pedidos[i].nombre}</td>
                 <td>${pedidos[i].cantidad}</td>
                 <td><a class="btn btn-sm btn-outline-succes text-light" id="boton-borrar" 
-                            onclick="borrarArticulos(${key})">Borrar</a></td>
+                            onclick="borrarArticulos(${i})">Borrar</a></td>
             </tr>
             `
 
             ;
-        }
+            }
+        };
 
        
         
@@ -141,11 +145,9 @@
                 for (let i=0; i<pedidos.length; i++){
                     if ( i == key ){
                         pedidos[i]= {};
-
+                   let node= document.getElementById("tr-" +i);
+                   node.parentNode.removeChild(node);
                     }
-                for (let i=0; i<pedidos.length; i++){
-                    console.log(pedidos[i])
-                }
                 }
             }
         

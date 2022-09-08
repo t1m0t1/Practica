@@ -15,12 +15,34 @@ router.use(express.urlencoded());
 
 
 router.get('/create', async(req,res)=> {
-    const articulo =await conexion.query('SELECT * FROM articulo'
+    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
     );
  
     res.render('carga.hbs',{articulo: articulo});
    
 });
+/* revisar por que no redirecciona */
+router.post('/create/articulo', async(req,res)=>{
+    
+
+    
+    const sql= "INSERT INTO articulo SET ?"
+    const data= {nombre_articulo:req.body.nombre,
+        categoria_articulo:req.body.categoria,
+        cantidad:req.body.cantidad,
+        punto_reposicion:req.body.reposicion,
+        sector: req.body.sector};
+
+
+    await conexion.query(sql,data,function(err,results){
+        if(err){
+            throw err;
+        }else{
+            console.log(data)
+        }
+    });
+    res.redirect('/create');
+})
 
 
 
@@ -29,7 +51,7 @@ router.get('/create', async(req,res)=> {
 //----------------------------------------Inicio (Mostrar articulos)----------------------------------------//
 
 router.get('/inicio', async(req,res)=>{
-    const articulo =await conexion.query('SELECT * FROM articulo'
+    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
     );
    
     res.render('inicio',{articulo: articulo});
@@ -52,76 +74,64 @@ router.post('/reposicion/articulo', async(req,res)=>{
         let pedido = req.body.pedidos;
         /* traemos desde el body el nombre de usuario */
         let username= req.user.username;
+
         for (let i=0; i< pedido.length; i++){
-            /* traemos la cantidad actual del articulo */
-        let cantidad_actual= await conexion.query('SELECT cantidad FROM articulo WHERE id_articulo =' + pedido[i].id);
-        (err,results)=>{
+        if (pedido[i].id != undefined){
+                    console.log("exito");
+                    /* traemos la cantidad actual del articulo */
+                let cantidad_actual= await conexion.query('SELECT cantidad FROM articulo WHERE id_articulo =' + pedido[i].id);
+                (err,results)=>{
+                            
+                    if(err){
+                        console.log(err)
+                        throw err;
+                    }else{
+                        
+                    }}
+                    console.log(pedido[i].cantidad)
+                    cantidad_actual=JSON.stringify(cantidad_actual)
+                    cantidad_actual=JSON.parse(cantidad_actual)
                     
+
+                /*Calcuular el stock final*/
+                let stock_final = cantidad_actual[0].cantidad - pedido[i].cantidad;
+
+                    /* Se insertan los valores a la tabla historal */
+                await conexion.query('INSERT INTO historial (id_articulo,stock_inicial,modificacion,stock_final,username) VALUES ('
+                + pedido[i].id +',' +cantidad_actual[0].cantidad+ ','+ pedido[i].cantidad + ','+ stock_final+ ','+ username +')');
+                (err,results)=>{
+                            
+                    if(err){
+                        console.log(err)
+                        throw err;
+                    }else{
+                        
+                    }}
+                    /* Se modifica el stock */
+                await conexion.query('UPDATE articulo SET cantidad = cantidad +'+ pedido[i].cantidad +
+                                            ' WHERE id_articulo =' + pedido[i].id);
+                    
+                (err,results)=>{
+                            
             if(err){
                 console.log(err)
                 throw err;
             }else{
                 
             }}
-            console.log(pedido[i].cantidad)
-            cantidad_actual=JSON.stringify(cantidad_actual)
-            cantidad_actual=JSON.parse(cantidad_actual)
-            
-
-        /*Calcuular el stock final*/
-        let stock_final = cantidad_actual[0].cantidad - pedido[i].cantidad;
-
-            /* Se insertan los valores a la tabla historal */
-        await conexion.query('INSERT INTO historial (id_articulo,stock_inicial,modificacion,stock_final,username) VALUES ('
-        + pedido[i].id +',' +cantidad_actual[0].cantidad+ ','+ pedido[i].cantidad + ','+ stock_final+ ','+ username +')');
-        (err,results)=>{
-                    
-            if(err){
-                console.log(err)
-                throw err;
-            }else{
-                
-            }}
-            /* Se modifica el stock */
-        await conexion.query('UPDATE articulo SET cantidad = cantidad +'+ pedido[i].cantidad +
-                                    ' WHERE id_articulo =' + pedido[i].id);
-            
-        (err,results)=>{
-                    
-    if(err){
-        console.log(err)
-        throw err;
-    }else{
-        
-    }}
+        }else{
+            console.log("no salio");
+            console.log(pedido[i]);
         }
         
+        }
+
         res.redirect('articulo');
         
     });
 
 
-router.post('/create/articulo', async(req,res)=>{
-    
 
-    
-    const sql= "INSERT INTO articulo SET ?"
-    const data= {nombre_articulo:req.body.nombre,
-        categoria_articulo:req.body.categoria,
-        cantidad:req.body.cantidad,
-        punto_reposicion:req.body.reposicion};
-
-
-    await conexion.query(sql,data,function(err,results){
-        if(err){
-            throw err;
-        }else{
-            console.log(data);
-
-        }
-    })
-    res.redirect('/create');
-})
 
 
 //----------------------------------------Metodo modificar----------------------------------------//
@@ -231,7 +241,7 @@ router.post('/pedidoUsuario', async (req,res)=>{
 })
 
     router.get('/usuario', async(req,res)=>{
-        const usuario =await conexion.query('SELECT * FROM usuario'
+        const usuario =await conexion.query('SELECT u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.nombre FROM usuario u JOIN area a ON u.area = a.id_area'
         );
        
         res.render('user/usuario',{usuario: usuario});
