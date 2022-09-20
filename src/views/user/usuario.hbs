@@ -20,3 +20,143 @@
 
                     </table>
 </div>
+
+
+{{!-- Modal para editar --}}
+<div class="modal" tabindex="-1" id="editModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="cerrarEdit()"></button>
+      </div>
+      <div class="modal-body" id="mensajeEdit">
+
+      </div>
+      <div class="modal-footer">
+
+    <button type="button" class="btn btn-secondary popover-test" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarEdit()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Modale Para Eliminar --}}
+<div class="modal" tabindex="-1" id="deleteModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrar usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarDelete()"></button>
+      </div>
+      <div class="modal-body form-control" id="mensajeDelete">
+
+      </div>
+
+      <div class="modal-footer">
+        <form action="/usuario/delete" method="POST">
+        <input type="number" name="id_usuario" id="inputKey" value="" hidden>
+    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Cerrar">Eliminar</button>
+        </form>
+    <button type="button" class="btn btn-secondary popover-test" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarDelete()">Cerrar</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const usuarios = {{{ json usuario }}};
+
+
+    const modalEliminar =(key)=>{
+     
+      mensajeDelete.innerHTML +=
+                    `  
+            <p id="parrafo">¿Esta seguro que desea eliminar al usuario ${usuarios[key].nombre} ${usuarios[key].apellido}?</p>
+            `
+          let Key = document.getElementById("inputKey");
+          Key.value = usuarios[key].id_usuario;
+
+          console.log(Key)
+        $("#deleteModal").show();
+    }
+    const cerrarDelete =()=>{
+
+     let node = document.getElementById("parrafo");
+                node.parentNode.removeChild(node);
+
+        $("#deleteModal").hide();
+    }
+
+
+
+   const modalEdit =(key)=>{
+     
+      mensajeEdit.innerHTML +=
+                    `  
+                                <form class=" pt-5" action="/user/usuarioAlta" method="post" id="formulario">
+
+                        <div class="col-auto">
+                            <div class="col-auto">
+                                <label class="col-md-5" for="">Usuario</label>
+                                <input name="username"  minlength="7" maxlength="8" class="form-control col-md-4" type="text" value="${usuarios[key].username}">
+                            </div>
+            
+                                <div class="col-auto">
+                                    <label class="form-label " for="">Nombre</label>
+                                    <input name="nombre" class="form-control" type="text" value="${usuarios[key].nombre}">
+                                </div>
+
+                                <div class="col-auto">
+                                    <label class="form-label " for="">Apellido</label>
+                                    <input name="apellido" class="form-control" type="text" value="${usuarios[key].apellido}">
+                                </div>
+            
+                            <div class="col-auto">
+                                <label class="col-md-5 " for="">Area</label>
+                                <select class="form-control col-md-4" name="area">
+                                    <option value="null" selected>Seleccionar</option>
+                                    <option value="3">legales</option>
+                                    <option value="2">Contable</option>
+                                    <option value="1">Sistema</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-auto">
+                                <label class="col-md-5 " for="">Rol</label>
+                                <select class="form-control col-md-4" name="rol">
+                                    <option value="null" selected>Seleccionar</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Contables</option>
+                                    <option value="3">Defensor</option>
+                                    <option value="4">Empleado</option>
+                                    <option value="5">Responsable</option>
+                                </select>
+                            </div>                        
+                            <!-- botones -->
+                            <div class="pb-5">
+
+                                <button type="submit" class="btn btn-primary mt-4 ms-auto">Confirmar</button>
+            
+                            </div>
+
+                        </div>
+            
+                    </form>
+            `
+          let Key = document.getElementById("inputKey");
+          Key.value = usuarios[key].id_usuario;
+
+          console.log(Key)
+        $("#editModal").show();
+    }
+    const cerrarEdit =()=>{
+
+     let node = document.getElementById("formulario");
+                node.parentNode.removeChild(node);
+
+        $("#editModal").hide();
+    }
+
+</script>

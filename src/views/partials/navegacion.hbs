@@ -2,12 +2,13 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
         
-        <div class="dv-nav">
 
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="me-4 pe-4">
-                   <img src="img/defensoria_sgo_copia.png" style="height: 5rem;">
-                    </div>
+
+                        <a class="navbar-brand" href="#"> 
+                   <img style="height: 5rem; margin-top: 0;" src="/img/logo-nav.png">
+                        </a>
+
                 <div class="container-fluid">
                      
                     <ul class="navbar-nav me-auto">
@@ -19,7 +20,7 @@
                             <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ingreso</a>
                     <div class="dropdown-menu" >
                         <a href="/create" class="dropdown-item">Alta de producto</a>
-                        <a href="/reposicion/articulo" class="dropdown-item">Reposicion</a>
+                        <a href="/reposicion" class="dropdown-item">Reposicion</a>
                     </div>
 
                              <li class="nav-item dropdown">
@@ -51,17 +52,9 @@
 
                             </ul>
                             
-                                <p class="me-5 pe-5 text-light fst-italic fs-4">Bienvenido {{user.apellido}} {{user.nombre}}</p>
+                                <p class="nombreUsuario me-5 pe-5 text-light fst-italic fs-4">Bienvenido {{user.apellido}} {{user.nombre}}</p>
                             
-
-
-                            <li class=" nav-item dropdown" id="h-usuario">
-                                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Opciones</a>
-                            <div class="dropdown-menu">
-                            <a href="/usuario/datos" class="dropdown-item">Perfil</a>
-                        </div>
-                         </li>
-                         <a href="/logout">Salir</a>
+                         <a href="/logout"><span class="material-symbols-rounded">logout</span></a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -72,7 +65,6 @@
 
 
                         </nav>    
-        </div> 
    
 
 

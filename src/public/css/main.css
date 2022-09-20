@@ -25,14 +25,44 @@
     --input-color:var(--primary-color);
 }
 
-.boton-primario{
-    background-color: blue;
+[type=search]{
+    background-color: white !important;
+}
+select{
+    background-color: white !important;
 }
 
 .contenedor{
-    background-color:var(--color-acento);
+    max-height: 100%;
 }
 
-.navbar{
-    background: var(--color-primario);
+.navegacion{
+    height: auto;
 }
+
+
+.nombreUsuario{
+    height: 2rem;
+    width: 30rem;
+    position: relative;
+    font-family:'Times New Roman', Times, serif
+    
+}
+
+.fondo-login{
+    background-image: url("/img/fondo login.jpg");
+    background-size: cover;
+}
+
+.fondo{
+    background: linear-gradient(0deg, rgba(158,163,168,1) 0%, rgba(37,37,37,1) 100%);
+    background-repeat: no-repeat;
+}
+
+div#myTable_length label{
+    color: white !important;
+  }
+
+div#myTable_filter label{
+    color: white !important;
+  }

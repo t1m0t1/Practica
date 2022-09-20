@@ -1,9 +1,9 @@
 const express = require ('express');
-const { userInfo } = require('os');
 const router = express.Router();
 const path = require ('path');
 const conexion  = require ('../js/conexion_slq');
 const bodyParser = require('body-parser');
+const { userInfo } = require('os');
 const { nextTick } = require('process');
 const { debug } = require('console');
 
@@ -38,10 +38,12 @@ router.post('/create/articulo', async(req,res)=>{
         if(err){
             throw err;
         }else{
-            console.log(data)
+
+
         }
+        res.redirect('/create');
     });
-    res.redirect('/create');
+
 })
 
 
@@ -60,14 +62,14 @@ router.get('/inicio', async(req,res)=>{
 
 //----------------------------------------Metodo insertar----------------------------------------//
 
-router.get('/reposicion/articulo', async(req,res)=>{
+router.get('/reposicion', async(req,res)=>{
     const articulo =await conexion.query('SELECT * FROM articulo'
     );
 
     res.render('reposicion.hbs', {articulo: articulo});
 });
 
-router.post('/reposicion/articulo', async(req,res)=>{
+router.post('/reposicion', async(req,res)=>{
 
         req.body.pedidos = JSON.parse(req.body.pedidos);
 
@@ -126,7 +128,7 @@ router.post('/reposicion/articulo', async(req,res)=>{
         
         }
 
-        res.redirect('articulo');
+        res.redirect('reposicion');
         
     });
 
@@ -246,17 +248,16 @@ router.post('/pedidoUsuario', async (req,res)=>{
        
         res.render('user/usuario',{usuario: usuario});
     });
-
+/* Error al cargar el logo de defensoria */
     router.get('/historial/carga', async (req,res)=>{
         let rol = req.user.rol;
         if (rol != 5 || rol!= 4){
             const historial =await conexion.query('SELECT a.nombre_articulo, h.stock_inicial, h.modificacion, h.stock_final, u.nombre, u.apellido, h.fecha FROM historial h JOIN usuario u ON h.username = u.username JOIN articulo a ON h.id_articulo= a.id_articulo');
-            historial.fecha = format(historial.fecha, 'YYYY-mm-DD');
             res.render('historialcarga', {historial: historial});
         }else{
             const historial =await conexion.query('SELECT a.nombre_articulo, h.stock_inicial, h.modificacion, h.stock_final, u.nombre, u.apellido, h.fecha FROM historial h JOIN usuario u ON h.username = u.username JOIN articulo a ON h.id_articulo= a.id_articulo WHERE u.area='+ req.user.area);
             res.render('historialcarga', {historial: historial});
         }
 
-    })
+    });
 module.exports = router;

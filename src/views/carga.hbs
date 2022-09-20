@@ -1,10 +1,10 @@
 {{>navegacion}}
-<div class="mt-5 mb-4 rounded bg-secondary bg-gradient border-dark m-4" style="--bs-bg-opacity: .7;"> 
+<div class="pb-3"> 
 
 
-    <div class="ms-4 me-4">
+    <div class="me-4">
 
-          <div class="mt-5 mb-4  ">
+          <div class="mb-4  ">
              <div class="container">
 
             <div class="row  justify-content-center align-items-center">
@@ -14,12 +14,12 @@
  
              <div class="col-auto">
                  <div class="col-auto">
-                 <label class="col-md-2" for="nombre">Nombre</label>
+                 <label class="col-md-2 text-light" for="nombre">Nombre</label>
                  <input type="text" class="form-control col-md-4" name="nombre" id="nombre" required>
                  </div>
  
                  <div class="col-auto">   
-                     <label class="col-md-2" for="categoria">Categoria</label>
+                     <label class="col-md-2 text-light" for="categoria">Categoria</label>
                      <select class="form-control col-md-4" name="categoria" id="categoria" required>
                          <option value="-1" selected></option>
                          <option value="1">Informatica</option>
@@ -42,11 +42,11 @@
                             </div>
  
                  <div class="col-auto">    
-                     <label for="cantidad">Cantidad</label>
+                     <label class="text-light" for="cantidad">Cantidad</label>
                      <input type="number" min="0" class="form-control" name="cantidad" id="cantidad" required>
                  </div>
                  <div class="col-auto">
-                     <label for="reposicion">Punto de Reposicion</label>
+                     <label class="text-light" for="reposicion">Punto de Reposicion</label>
                      <input type="number" min="0" class="form-control" name="reposicion" id="reposicion" required> 
                  </div>
                  <button type="submit" class="btn btn-dark mt-4">cargar</button>
@@ -67,9 +67,9 @@
     </div>
 </div>
 
-    <div class="ms-4 me-4">
+    <div class="ps-4 pe-4">
 
-          <div class="mt-5 mb-4  ">
+          <div class="pb-4  ">
 <div class="tb-tools">
              <button class="btn btn-dark mt-5 mb-4" id="btnTabla" onclick="MostrarOcultar()">Mostrar</button>
                                              <!-- Tabla -->
