@@ -25,14 +25,77 @@
     --input-color:var(--primary-color);
 }
 
-.boton-primario{
-    background-color: blue;
+
+
+[type=search]{
+    background-color: white !important;
+}
+select{
+    background-color: white !important;
 }
 
 .contenedor{
-    background-color:var(--color-acento);
+    max-height: 100%;
 }
 
-.navbar{
-    background: var(--color-primario);
+.navegacion{
+    height: auto;
 }
+
+
+.nombreUsuario{
+    height: 2rem;
+    width: 25rem;
+    position: relative;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+
+    
+}
+
+.fondo-login{
+    background-image: url("/img/fondo login.jpg");
+    background-size: cover;
+}
+
+.fondo{
+    background: rgb(118,124,124);
+    background: linear-gradient(0deg, rgba(118,124,124,1) 6%, rgba(0,0,0,1) 67%);
+    background-repeat: no-repeat;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.numerador{
+    position: absolute; top: 0; right: 0; 
+    width: 100px; 
+    text-align:right;
+    color: white;
+    
+}
+
+.tarjeta{
+
+    flex: 1 1 auto;
+    margin: 5px;
+
+}
+
+.card-area{
+
+    width: 20rem;
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(0,2,47,1) 58%);
+}
+
+div#myTable_length label{
+    color: white !important;
+  }
+div#myTable_info{
+    color: white !important;
+    font-weight: bold;
+  }
+
+div#myTable_filter label{
+    color: white !important;
+  }

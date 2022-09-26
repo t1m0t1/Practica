@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 require('./lib/passport');
 
-/* app.use(express.urlencoded()); */
+app.use(express.urlencoded());
 
 
 //----------------------------------------configuraciones----------------------------------------//
@@ -69,6 +69,8 @@ app.use((req, res, next) => {
 //----------------------------------------rutas----------------------------------------//
 app.use(require('./routes/index'));
 app.use(require('./routes/autenticacion'));
+app.use(require('./routes/user'));
+app.use(require('./routes/peticiones'));
 
 
 

@@ -7,8 +7,9 @@
                         <td> {{nombreUsuario}} </td>
                         <td> {{apellido}} </td>
                         <td> {{nombre}} </td>
-                        <td> <input class="btn btn-sm btn-secondary text-light" type="button" value="Editar">
-                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Eliminar">
+                        <td> 
+                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Editar" onclick="modalEdit({{@key}})">
+                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Eliminar" onclick="modalEliminar({{@key}})">
                         </td>
 
                         
