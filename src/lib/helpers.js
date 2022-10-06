@@ -1,4 +1,6 @@
 const bcrypt = require('bcryptjs');
+const timeago = require('timeago.js');
+const timeagoInstance = timeago;
 
 const helpers = {};
 
@@ -14,6 +16,10 @@ helpers.matchPassword = async (password, savedPassword) => {
   } catch (e) {
     console.log(e)
   }
+};
+
+helpers.timeAgo = (savedTimestamp) => {
+  return timeagoInstance.format(savedTimestamp);
 };
 
 helpers.colorEstado =    (cantidad , reposicion)=> {if (cantidad > reposicion) {return "table-success";

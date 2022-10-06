@@ -1,5 +1,11 @@
 {{>navegacion}}
-<div>
+<div id="contenedorPedidos" hidden>
+
+
+
+  </div>
+
+<div id="contenedorTarjetas">
 <div class="row row-cols-1 row-cols-md-4">
 
   <div class="col" style="margin-bottom: 1rem;">
@@ -12,7 +18,7 @@
         
       <img src="/img/iconos-areas/informatica.jpg" class="card-img-top" alt="...">
         <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">Revisar</button>
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(1)">Revisar </button>
     </div>
       </div>
     </div>
@@ -28,7 +34,7 @@
         
       <img src="/img/iconos-areas/contables.jpg" class="card-img-top" alt="...">
         <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">Revisar</button>
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(2)">Revisar</button>
     </div>
       </div>
     </div>
@@ -44,7 +50,7 @@
         
       <img src="/img/iconos-areas/tramites.jpg" class="card-img-top" alt="...">
         <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">Revisar</button>
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(4)">Revisar</button>
     </div>
       </div>
     </div>
@@ -76,7 +82,7 @@
         
       <img src="/img/iconos-areas/legales.jpg" class="card-img-top" alt="...">
         <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">Revisar</button>
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(3)">Revisar</button>
     </div>
       </div>
     </div>
@@ -100,3 +106,117 @@
 
 </div>
 </div>
+
+
+
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Pedidos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="mensaje-modal">
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+      {{!-- colocar X para cerrar la tabla 
+      Cuando se presione en el boton revisar de cualquier area que se oculte el div donde se encuentran las tarjetas 
+      hasta que se cierre la tabla --}}
+
+<script>
+const mostrarPedidos =(id_area)=>{
+     
+    let contenedor = document.getElementById("contenedorPedidos");
+    let contenedorTarjetas = document.getElementById("contenedorTarjetas");
+    
+    
+
+    if(contenedor.hidden){
+        contenedor.hidden = false;
+        contenedorTarjetas.hidden = true;
+
+    }else{
+        contenedor.hidden = true;
+        contenedorTarjetas.hidden = false;
+    }
+
+     switch (id_area){
+      case 1:
+      break;
+      case 2:
+
+{{!--     if ($('#contenedorPedidos').is(':empty')){ --}}
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Estado</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each contable}}
+                      <tr id="items">
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+                      </tr>
+            {{/each}}
+          </tbody>  
+      </table>
+                    </div>
+            `
+    
+      
+      break;
+      case 3:
+      break;
+      case 4:
+      break;
+      case 5:
+      break;
+     }
+
+
+
+}
+
+const cerrarVentana =()=>{
+    let contenedor = document.getElementById("contenedorPedidos");
+    let contenedorTarjetas = document.getElementById("contenedorTarjetas");
+
+      $("#tabla").remove();
+
+      if(contenedor.hidden){
+        contenedor.hidden = false;
+        contenedorTarjetas.hidden = true;
+        
+
+        
+    }else{
+        contenedor.hidden = true;
+        contenedorTarjetas.hidden = false;
+       
+    }
+      
+}
+</script>
