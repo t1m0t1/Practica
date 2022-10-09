@@ -16,23 +16,24 @@ router.get("/pedido/aut", async(req, res)=>{
     const tramites= [];
 
     for (let i=0; i< peticion.length; i++ ){
-        switch (peticion[i].id_area){
-            case 1: sistemas.push(peticion[i]); 
-            break;
-            case 2: contable.push(peticion[i]);
-            break;
-            case 3: legales.push(peticion[i]);
-            break;
-            case 4: tramites.push(peticion[i]);
-            break;
+        if (peticion.estado = 1){
+
+            switch (peticion[i].id_area){
+                case 1: sistemas.push(peticion[i]); 
+                break;
+                case 2: contable.push(peticion[i]);
+                break;
+                case 3: legales.push(peticion[i]);
+                break;
+                case 4: tramites.push(peticion[i]);
+                break;
+            }
         }
     }
 
-    console.log("Adentro")
-    console.log(peticion[0].id_area)
-    console.log(contable)
 
-    res.render("autorizacion", {contable: contable});
+
+    res.render("autorizacion", {contable: contable, sistemas: sistemas, legales: legales, tramites: tramites});
 });
 
 module.exports = router;

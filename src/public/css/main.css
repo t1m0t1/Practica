@@ -25,13 +25,20 @@
     --input-color:var(--primary-color);
 }
 
-
+*{
+    font-family: 'Roboto Condensed', sans-serif;
+}
 
 [type=search]{
     background-color: white !important;
 }
 select{
     background-color: white !important;
+}
+
+.cambiarLetra{
+    font-size: 1.15rem;
+    font-weight: 400;
 }
 
 .contenedor{
@@ -42,15 +49,77 @@ select{
     height: auto;
 }
 
+.imgInicio{
+    z-index: 500;
+    object-fit: cover;
+    width: 100%;
+    height: 41.3rem;
+}
+
+.contenedorIconos{
+    position: relative;
+    z-index: 1;
+}
+
+.iconos{
+    border-radius: 10px;
+    height: 30%;
+    width: 30%;
+    box-shadow:-2px 2px 4px black ;
+    background-color: rgba(241, 245, 236, 0.705);
+    left: 30%;
+    bottom: 25%;
+    position: absolute;
+    z-index: 2;
+}
+
+
+
+.icono{
+    filter: drop-shadow( -2px 2px 4px black);
+    margin: 1rem 2rem 1rem 1.7rem;
+    height: 4.5rem;
+    width: 4.5rem;
+}
+
+
+
+.icono:hover{
+    transform: scale(1.1);
+}
+
+#logoDefe{
+    filter: drop-shadow( -2px 2px 4px black);
+    width: 40rem;
+    margin-right: 2rem;
+}
+
+#logoDefeBlanco{
+    z-index: 4;
+    position: absolute;
+    top:15%;
+    right: 43%;
+
+}
 
 .nombreUsuario{
+    z-index: 3;
+    top: 17%;
+    right: 8%;
+    position: absolute;
     height: 2rem;
     width: 25rem;
-    position: relative;
-    text-align: center;
-    font-family:'Times New Roman', Times, serif;
+    
 
     
+}
+
+.user{
+    text-shadow: -2px 2px 4px black;
+    color: white;
+    font-size: 4rem;
+    font-weight: 700;
+
 }
 
 .fondo-login{
