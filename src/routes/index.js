@@ -53,11 +53,15 @@ router.post('/create/articulo', async(req,res)=>{
 //----------------------------------------Inicio (Mostrar articulos)----------------------------------------//
 
 router.get('/inicio', async(req,res)=>{
+    res.render('inicio');
+});
+
+router.get('/stock', async(req,res)=>{
     const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
     );
    
-    res.render('inicio',{articulo: articulo});
-});
+    res.render('stock',{articulo: articulo});
+})
 
 
 //----------------------------------------Metodo insertar----------------------------------------//
