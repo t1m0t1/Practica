@@ -1,89 +1,88 @@
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-        
-
-            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000; !important">
-
-                        <a class="navbar-brand" href="#"> 
-                   <img style="height: 4rem; margin-top: 0;" src="/img/logo-nav.png">
-                        </a>
-
-                <div class="container-fluid">
-                     
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a href="/inicio" class="fw-bold nav-link active">Inicio</a>
-                        </li>
-
-                        <li class="nav-item dropdown" id="h-carga">
-                            <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ingreso</a>
-                    <div class="dropdown-menu" >
-                        <a href="/create" class="dropdown-item">Alta de producto</a>
-                        <a href="/reposicion" class="dropdown-item">Reposicion</a>
-                    </div>
-
-                             <li class="nav-item dropdown">
-                                    <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historial</a>
-                                <div class="dropdown-menu">
-                                <a href="/historial/carga" class="dropdown-item">Historial de Ingresos</a>
-                                <a href="" class="dropdown-item">Historial de Pedidos</a>
-
-                                </div>
-
-                             </li>
-
-                             <li class=" nav-item dropdown" id="h-usuario">
-                                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuario</a>
-                            <div class="dropdown-menu">
-                            <a href="/user/usuarioAlta" class="dropdown-item">Alta de usuario</a>
-                            <a href="/usuario" class="dropdown-item">Administrar usuario</a>
-                        </div>
-                         </li>
-
-                            <li class=" nav-item dropdown">
-                                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pedidos</a>
-                            <div class="dropdown-menu">
-                            <a href="/pedido" class="dropdown-item">Estado de pedido</a>
-                            <a href="/pedidoUsuario" class="dropdown-item">Realizar pedido</a>
-                        </div>
-
-                         </li>
-                           <li class="nav-item">
-                            <a href="/pedido/aut" class="fw-bold nav-link ">Autorizacion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/inicio" class="fw-bold nav-link ">Respuesta</a>
-                        </li>
-
-                            </ul>
-                            
-                                <p class="nombreUsuario text-light fst-italic fs-4">Bienvenido {{user.apellido}} {{user.nombre}}</p>
-                            
-                         <a href="/logout"><span class="material-symbols-rounded">logout</span></a>
-{{!--                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button> --}}
-                                                     
-                            
-                            
-                            </div> 
 
 
-                        </nav>    
-   
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000; !important">
+
+    <a class="navbar-brand" href="/inicio">
+        <img style="height: 4rem; margin-top: 0;" src="/img/logo-nav.png">
+    </a>
+
+    <div class="container-fluid">
+
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a href="/inicio" class="fw-bold nav-link active">Inicio</a>
+            </li>
+
+            <li class="nav-item dropdown" id="h-carga">
+                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Ingreso</a>
+                <div class="dropdown-menu">
+                    <a href="/create" class="dropdown-item">Alta de producto</a>
+                    <a href="/reposicion" class="dropdown-item">Reposicion</a>
+                </div>
+
+            <li class="nav-item dropdown">
+                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Historial</a>
+                <div class="dropdown-menu">
+                    <a href="/historial/carga" class="dropdown-item">Historial de Ingresos</a>
+
+                </div>
+
+            </li>
+
+            <li class=" nav-item dropdown">
+                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Pedidos</a>
+                <div class="dropdown-menu">
+                    <a href="/pedido" class="dropdown-item">Estado de pedido</a>
+                    <a href="/pedidoUsuario" class="dropdown-item">Realizar pedido</a>
+                </div>
+
+            </li>
+            <li class="nav-item">
+                <a href="/pedido/aut" class="fw-bold nav-link ">Autorizacion</a>
+            </li>
+            <li class="nav-item">
+                <a href="/inicio" class="fw-bold nav-link ">Respuesta</a>
+            </li>
+
+
+            <li class=" nav-item dropdown" id="h-usuario">
+                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Usuario</a>
+                <div class="dropdown-menu">
+                    <a href="/user/usuarioAlta" class="dropdown-item">Alta de usuario</a>
+                    <a href="/usuario" class="dropdown-item">Administrar usuario</a>
+                </div>
+            </li>
+        </ul>
+
+        <p class="nombreUsuario text-light fst-italic fs-4">Bienvenido {{user.apellido}} {{user.nombre}}</p>
+
+        <a href="/logout"><span class="material-symbols-rounded">logout</span></a>
+
+    </div>
+
+
+</nav>
+
 
 
 <script>
-    
- $(document).ready( function () {
 
-     switch ({{user.rol}}){
+    $(document).ready(function () {
+
+        switch ({{user.rol
+    }}){
         case 1:
-        let option= document.getElementById("h-usuario");
+        let option = document.getElementById("h-usuario");
         option.remove();
         break;
-        case 3: 
+        case 3:
     }
 } );
 </script>

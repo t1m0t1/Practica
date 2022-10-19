@@ -169,8 +169,9 @@ select{
     background: rgb(118,124,124);
     background: linear-gradient(0deg, rgba(118,124,124,1) 6%, rgba(0,0,0,1) 67%);
     background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
-    min-width: 100vh;
+    min-width: 100%;
 }
 
 .numerador{

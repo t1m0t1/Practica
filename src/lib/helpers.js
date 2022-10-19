@@ -18,7 +18,7 @@ helpers.matchPassword = async (password, savedPassword) => {
   }
 };
 
-helpers.timeAgo = (savedTimestamp) => {
+helpers.timeAgo = (savedTimestamp) => {  
   return timeagoInstance.format(savedTimestamp);
 };
 
