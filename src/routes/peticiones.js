@@ -11,7 +11,7 @@ router.get("/pedido/res", async(req, res)=>{
 });
 
 router.get("/pedido/aut", async(req, res)=>{
-   const peticion = await conexion.query('SELECT a.nombre_articulo, p.fecha_peticion, p.estado, u.nombre , u.apellido, ar.nombre AS nombre_area, ar.id_area, p.id_peticion FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion=p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON a.id_articulo = pa.id_articulo JOIN area ar ON ar.id_area = u.area WHERE p.estado=1 AND pa.estado=1 ORDER BY p.id_peticion DESC');
+   const peticion = await conexion.query('SELECT a.nombre_articulo, a.cantidad AS stock, pa.cantidad, pa.id_peticion_articulo, p.fecha_peticion, p.estado, u.nombre , u.apellido, ar.nombre AS nombre_area, ar.id_area, p.id_peticion FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion=p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON a.id_articulo = pa.id_articulo JOIN area ar ON ar.id_area = u.area WHERE p.estado=1 AND pa.estado=1');
 
 
     const sistemas= [];
@@ -57,9 +57,11 @@ router.get("/pedido/aut", async(req, res)=>{
         }
     }
 
+    router.post("/pedido/aut", async(req, res)=>{
 
+    });
 
-    res.render("autorizacion", {contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
+    res.render("autorizacion", {peticion:peticion, contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
         atencionAlPublico: atencionAlPublico, recursosHumanos:recursosHumanos, personalLimpieza:personalLimpieza,
         logistica:logistica, niniez:niniez, relacionesPublicas:relacionesPublicas, despacho:despacho});
 });
