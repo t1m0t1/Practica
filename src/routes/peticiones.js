@@ -57,13 +57,21 @@ router.get("/pedido/aut", async(req, res)=>{
         }
     }
 
-    router.post("/pedido/aut", async(req, res)=>{
-
-    });
-
     res.render("autorizacion", {peticion:peticion, contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
         atencionAlPublico: atencionAlPublico, recursosHumanos:recursosHumanos, personalLimpieza:personalLimpieza,
         logistica:logistica, niniez:niniez, relacionesPublicas:relacionesPublicas, despacho:despacho});
+});
+
+router.post("/pedido/aut", async(req, res)=>{
+    req.body.pedidos = JSON.parse(req.body.pedidos);
+    let pedido = req.body.pedidos;
+
+    for (let i=0; i< pedido.length; i++){
+        
+        const actualizacion= await conexion.query('UPDATE peticion_articulo SET estado = ' + 2 +' , cantidad= ' + pedido[i].cantidad + ' ' + 'WHERE id_peticion_articulo =' + pedido[i].id)
+    }
+
+    res.redirect('/pedido/aut');
 });
 
 module.exports = router;
