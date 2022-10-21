@@ -182,6 +182,80 @@ select{
     
 }
 
+
+.contenedorRes{
+    width: max-content;
+    height: 500px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.fondoTarjRes{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 32.2rem;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 2rem;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
+.textRes{
+    text-align: center;
+    color: white;
+}
+
+.textCenter{
+    min-height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjetaRes{
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 30rem;
+    height: 7rem;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+
+
+}
+
+
+#tar1{
+    background-image: url("/img/iconos-areas/informatica.jpg");
+
+}
+
+#fondoTar1{
+    background-color: rgb(104, 21, 83);
+}
+
+
+#tar2{
+    background-image: url("/img/iconos-areas/contables.jpg");
+}
+
+#fondoTar2{
+    background-color: rgb(29, 104, 155);
+}
+
+
+#tar3{
+    background-image: url("/img/iconos-areas/legales.jpg");
+}
+
+#fondoTar3{
+    background-color: rgb(167, 164, 45);
+}
+
+
+
 .tarjeta{
 
     flex: 1 1 auto;
