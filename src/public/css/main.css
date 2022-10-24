@@ -187,7 +187,12 @@ select{
     width: max-content;
     height: 500px;
     overflow: scroll;
-    scrollbar-width: none;
+/*     flex-direction: column;
+ *//*     scrollbar-width: none; */
+}
+
+.contenedorRes::-webkit-scrollbar{
+    display: none;
 }
 
 .fondoTarjRes{
@@ -203,7 +208,9 @@ select{
 
 .textRes{
     text-align: center;
-    color: white;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-shadow: -2px 2px 4px black;
 }
 
 .textCenter{
@@ -218,11 +225,11 @@ select{
     background-repeat: no-repeat;
     background-position: center;
 
+    
     width: 30rem;
     height: 7rem;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-
 
 }
 
@@ -254,7 +261,69 @@ select{
     background-color: rgb(167, 164, 45);
 }
 
+#tar4{
+    background-image: url("/img/iconos-areas/tramites.jpg");
+}
 
+#fondoTar4{
+    background-color: rgb(167, 128, 45);
+}
+
+#tar5{
+    background-image: url("/img/iconos-areas/atencion.jpg");
+}
+
+#fondoTar5{
+    background-color: rgb(240, 197, 132);
+}
+
+#tar6{
+    background-image: url("/img/iconos-areas/rrhh.jpg");
+}
+
+#fondoTar6{
+    background-color: rgb(98, 47, 165);
+}
+
+#tar7{
+    background-image: url("/img/iconos-areas/personal.jpg");
+}
+
+#fondoTar7{
+    background-color: rgb(179, 62, 62);
+}
+
+#tar8{
+    background-image: url("/img/iconos-areas/logistica.jpg");
+}
+
+#fondoTar8{
+    background-color: rgb(156, 156, 156);
+}
+
+#tar9{
+    background-image: url("/img/iconos-areas/niniez.jpg");
+}
+
+#fondoTar9{
+    background-color: rgb(5, 14, 139);
+}
+
+#tar10{
+    background-image: url("/img/iconos-areas/prensa.png");
+}
+
+#fondoTar10{
+    background-color: rgb(243, 119, 3);
+}
+
+#tar11{
+    background-image: url("/img/iconos-areas/despacho.jpg");
+}
+
+#fondoTar11{
+    background-color: rgb(0, 136, 102);
+}
 
 .tarjeta{
 
