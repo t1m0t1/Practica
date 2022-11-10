@@ -29,6 +29,7 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+
 .dropdown{
     display: inline-block;
     position: relative;
@@ -86,7 +87,7 @@ select{
     z-index: 500;
     object-fit: cover;
     width: 100%;
-    height: 41.3rem;
+    height: 100vh;
 }
 
 .contenedorIconos{
@@ -184,11 +185,17 @@ select{
 
 
 .contenedorRes{
-    width: max-content;
-    height: 500px;
+    width: 34rem;
+    height: 550px;
     overflow: scroll;
-/*     flex-direction: column;
- *//*     scrollbar-width: none; */
+}
+
+.btnRes{
+    background: none;
+    border: none;
+    height: 8.5rem;
+    margin: 0;
+    padding-top: 0;
 }
 
 .contenedorRes::-webkit-scrollbar{
@@ -199,8 +206,6 @@ select{
     margin-top: 1rem;
     margin-left: 1rem;
     width: 32.2rem;
-    padding-top: 3px;
-    padding-bottom: 3px;
     padding-left: 2rem;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
@@ -330,6 +335,13 @@ select{
     flex: 1 1 auto;
     margin: 5px;
 
+}
+
+.contenedorItems{
+    display: block;
+    margin-left: 7rem;
+    width: 45%;
+    background-color: rgba(240, 248, 255, 0.301);
 }
 
 .card-area{
