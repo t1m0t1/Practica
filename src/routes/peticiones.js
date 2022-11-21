@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 router.post("", async(req, res)=>{});
 
 router.get("/pedido/res", async(req, res)=>{
+
     let peticion = {};
     const area = req.user.area;
     console.log(area);
@@ -70,9 +71,32 @@ router.get("/pedido/res", async(req, res)=>{
 });
 
 router.post("/pedido/res", async(req, res)=>{
+    let username= req.user.username;
+
+    req.body.pedidos = JSON.parse(req.body.pedidos);
+    let pedido = req.body.pedidos;
+
+    for (let i=0;i< pedido.length; i++){
+        let cantidad_actual= await conexion.query('SELECT cantidad FROM articulo WHERE id_articulo =' + pedido[i].id_articulo);
+        const peticion_articulo =await conexion.query ("UPDATE peticion_articulo SET estado = 3 WHERE id_peticion_articulo = " + pedido[i].id_peticion_articulo);
+        cantidad_actual=JSON.stringify(cantidad_actual)
+        cantidad_actual=JSON.parse(cantidad_actual)
 
 
-    res.render("respuesta", );
+        const historial=await conexion.query ("INSERT historial (id_articulo ,stock_inicial ,modificacion, stock_final, username, tipo) VALUES ("+pedido[i].id_articulo +","  +cantidad_actual[0].cantidad + " ,"+pedido[i].cantidad+ " ,"+(cantidad_actual[0].cantidad - pedido[i].cantidad)+ " ,"+username+ ", 2);");
+        
+        const articulo =await conexion.query ("UPDATE articulo SET cantidad = cantidad -"+pedido[i].cantidad + " WHERE id_articulo = "+ pedido[i].id_articulo);
+        (err,results)=>{
+                            
+            if(err){
+                console.log(err)
+                throw err;
+            }else{
+                
+            }}
+    }
+
+    res.redirect('/pedido/res');
 
 });
 

@@ -163,27 +163,39 @@
             </thead>
             <tbody id="contenidoTabla">
 
-                 {{#each respuesta}}
-                <tr>
-                <td>{{id_articulo}}</td>
-                <td>{{timeAgo fecha_peticion}}</td>
-                <td>{{cantidad}}</td>
-                <td>{{nombre_articulo}}</td>
-                </tr>
-                {{/each}} 
+
             </tbody>
         </table>
+                    <form action="/pedido/res" method="POST">
+                <input hidden value="" name="pedidos" id="pedidos">
 
+               <button class="btn btn-primary " >Confimar todo</button>
+            </form>
     </div>
 </div>
 
 <script>
+
+   
+
+const confirmar= ()=>{
+    const inputPedidos = document.getElementById('pedidos');
+    inputPedidos.value = JSON.stringify(pedidos);
+
+}
+
  const mostrarPedidos= (area)=>{
     
     const tabla = document.getElementById("contenidoTabla");
 
+
     switch (area){
         case 1:
+        const pedidos = {{{json sistemas}}};
+        const inputPedidos = document.getElementById('pedidos');
+        inputPedidos.value = JSON.stringify(pedidos);
+        console.log(inputPedidos.value);
+
          contenidoTabla.innerHTML =
          `
         {{#each sistemas}}
@@ -195,13 +207,14 @@
                 <td class="text-center">{{cantidad}}</td>
                 <td><input type="checkbox" name="" id=""></td>
                 </tr>
-                {{/each}}`
+                {{/each}}
+                `
         break;
         
         case 2:
         contenidoTabla.innerHTML =
          `
-        {{#each sistemas}}
+        {{#each contable}}
                 <tr>
                 <td>{{id_articulo}}</td>
                 <td>{{timeAgo fecha_peticion}}</td>

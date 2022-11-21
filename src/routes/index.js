@@ -163,16 +163,18 @@ router.put('/edit/articulo', async(req,res)=>{
 
 router.get('/pedido', async(req,res)=>{
         let area= req.user.area;
-        let sql='SELECT * FROM peticion p JOIN usuario u ON p.username = u.id_usuario WHERE u.area =?';
-    const pedido =await conexion.query(sql ,[area],function(err,results){
+        let pedido=await conexion.query('SELECT p.fecha_peticion fecha , u.nombre, u.apellido, e.nombre_estado estado, a.nombre_articulo articulo FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion = p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON pa.id_articulo = a.id_articulo JOIN estado e ON pa.estado= e.id_estado WHERE u.area=' + area);
+    (err,results)=>{
         if(err){
             
             throw err;
         }else{
-            res.render('pedido',{pedido: results});
-
+            
         }
-    });
+    };
+    res.render('pedido',{pedido: pedido});
+/* 
+    SELECT p.fecha_peticion fecha , u.nombre, u.apellido, pa.estado, a.nombre_articulo articulo FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion = p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON pa.id_articulo = a.id_articulo WHERE u.area = 1; */
     
 
    
@@ -247,7 +249,7 @@ router.post('/pedidoUsuario', async (req,res)=>{
 })
 
     router.get('/usuario', async(req,res)=>{
-        const usuario =await conexion.query('SELECT u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.nombre FROM usuario u JOIN area a ON u.area = a.id_area'
+        const usuario =await conexion.query('SELECT u.rol, u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.id_area AS area, a.id_area FROM usuario u JOIN area a ON u.area = a.id_area'
         );
        
         res.render('user/usuario',{usuario: usuario});

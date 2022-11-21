@@ -12,11 +12,11 @@
     <div class="container-fluid">
 
         <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a href="/inicio" class="fw-bold nav-link active">Inicio</a>
+            <li class="nav-item" id="stock">
+                <a href="/stock" class="fw-bold nav-link active">Stock</a>
             </li>
 
-            <li class="nav-item dropdown" id="h-carga">
+            <li class="nav-item dropdown" id="carga">
                 <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">Ingreso</a>
                 <div class="dropdown-menu">
@@ -24,7 +24,7 @@
                     <a href="/reposicion" class="dropdown-item">Reposicion</a>
                 </div>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" id="historial">
                 <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">Historial</a>
                 <div class="dropdown-menu">
@@ -34,24 +34,24 @@
 
             </li>
 
-            <li class=" nav-item dropdown">
+            <li class=" nav-item dropdown" id="pedido">
                 <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">Pedidos</a>
                 <div class="dropdown-menu">
                     <a href="/pedido" class="dropdown-item">Estado de pedido</a>
-                    <a href="/pedidoUsuario" class="dropdown-item">Realizar pedido</a>
+                    <a href="/pedidoUsuario" class="dropdown-item" id="reaPedido">Realizar pedido</a>
                 </div>
 
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="aut">
                 <a href="/pedido/aut" class="fw-bold nav-link ">Autorizacion</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="res">
                 <a href="/pedido/res" class="fw-bold nav-link ">Respuesta</a>
             </li>
 
 
-            <li class=" nav-item dropdown" id="h-usuario">
+            <li class=" nav-item dropdown" id="usuario">
                 <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">Usuario</a>
                 <div class="dropdown-menu">
@@ -75,14 +75,52 @@
 <script>
 
     $(document).ready(function () {
+        let stock = document.getElementById("stock");
+        let carga = document.getElementById("carga");
+        let historial = document.getElementById("historial");
+        let pedido = document.getElementById("pedido");
+        let aut = document.getElementById("aut");
+        let res = document.getElementById("res");
+        let altaPedido = document.getElementById("reaPedido");
+        let usuario = document.getElementById("usuario");
 
-        switch ({{user.rol
-    }}){
+
+        switch ({{user.rol}}){
+        
         case 1:
-        let option = document.getElementById("h-usuario");
-        option.remove();
+        stock.remove();
+        carga.remove();
+        historial.remove();
+        pedido.remove();
+        aut.remove();
+        res.remove();
         break;
+        
+        case 2:
+        usuario.remove();
+        break;
+
         case 3:
+{{!--         carga.remove();
+        aut.remove();
+        res.remove();
+        usuario.remove(); --}}
+        break;
+        case 4:
+        carga.remove();
+        aut.remove();
+        res.remove();
+        historial.remove();
+        usuario.remove();
+        altaPedido.remove();
+        break;
+        case 5:
+        carga.remove();
+        aut.remove();
+        res.remove();
+        historial.remove();
+        usuario.remove();
+        break;
     }
 } );
 </script>

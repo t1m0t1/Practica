@@ -65,7 +65,7 @@
             <form action="/reposicion" method="POST">
                 <input type="hidden" value="" name="pedidos" id="pedidos">
 
-                <button type="submit" onclick="confirmar()">Confirmar</button>
+                <button type="submit" id="btnConfirmar" onclick="confirmar()" hidden>Confirmar</button>
             </form>
 
         </div>
@@ -75,9 +75,13 @@
 
 <script>
 
+
+
     const arrArticulos = {{{ json articulo }}};
+    var indice= 0;
 
     const pedidos = [];
+    console.log(pedidos[0])
     const addArticulos = (key) => {
 
 
@@ -92,6 +96,14 @@
 
             console.log(cantidad);
 
+            indice++;
+
+            if (indice == 0){
+            let btnConfirmar= document.getElementById("btnConfirmar");                
+            btnConfirmar.hidden = true;
+            }else{
+                btnConfirmar.hidden= false;
+            }
 
 
 
@@ -139,6 +151,8 @@
 
 
 
+
+
         } else {
             alert('Por favor seleccione un articulo')
         }
@@ -150,9 +164,19 @@
                 pedidos[i] = {};
                 let node = document.getElementById("tr-" + i);
                 node.parentNode.removeChild(node);
+
+            indice--;
+
+            if (indice == 0){
+            let btnConfirmar= document.getElementById("btnConfirmar");                
+            btnConfirmar.hidden = true;
+            }else{
+                btnConfirmar.hidden= false;
+            }
+
             }
         }
     }
 
-
+    
 </script>
