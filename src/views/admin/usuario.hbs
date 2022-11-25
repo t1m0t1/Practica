@@ -16,7 +16,25 @@
                         </tr>
                     </thead>
 
-                    {{>tablaUsuario}}
+                <tbody>
+                    {{#each usuario}}
+                        
+                     <tr class="">
+                        <th scope="row">{{id_usuario}}</th>
+                        <td> {{username}} </td>
+                        <td> {{nombreUsuario}} </td>
+                        <td> {{apellido}} </td>
+                        <td> {{area}} </td>
+                        <td> 
+                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Editar" onclick="modalEdit({{@key}})">
+                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Eliminar" onclick="modalEliminar({{@key}})">
+                        </td>
+
+                        
+
+                        </tr>
+                    {{/each}}
+                </tbody>
 
                     </table>
 </div>
@@ -35,8 +53,8 @@
 
                         <div class="col-auto">
                             <div class="col-auto">
-                                <label class="col-md-5" for="idusuario">Usuario</label>
-                                <input name="idusuario" id="idusuario"  minlength="7" maxlength="8" class="form-control col-md-4" type="text" value="" >
+                                <label class="col-md-5" for="idusuario" hidden>Usuario</label>
+                                <input name="idusuario" id="idusuario"  minlength="7" maxlength="8" class="form-control col-md-4" type="text" value="" hidden>
                             </div>
             
                                 <div class="col-auto">

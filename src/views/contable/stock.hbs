@@ -1,4 +1,4 @@
-{{>navegacion}}
+{{>navegacionContable}}
 <div class="vh-100 ">
 
     <div class="container">
@@ -19,7 +19,20 @@
                         </tr>
                     </thead>
 
-                    {{>tabla}}
+                <tbody>
+                    {{#each articulo}}
+                        
+                     <tr class="">
+                        <td scope="row">{{id_articulo}}</td>
+                        <td class="cambiarLetra"> {{nombre_articulo}} </td>
+                        <td class="cambiarLetra"> {{nombre}} </td>
+                        <td class="cambiarLetra"> {{cantidad}} </td>
+                        <td class="cambiarLetra"> {{nombre_sector}} </td>
+                        <td class="cambiarLetra"> {{punto_reposicion}} </td>
+
+                        </tr>
+                    {{/each}}
+                </tbody>
                 </table>
 
             </div>

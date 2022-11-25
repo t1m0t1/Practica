@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const { userInfo } = require('os');
 const { nextTick } = require('process');
 const { debug } = require('console');
+const { isLoggedIn } = require('../lib/auth');
 
 
 //----------------------------------------Se usara formato json----------------------------------------//
@@ -14,15 +15,15 @@ router.use(express.urlencoded());
 //----------------------------------------views----------------------------------------//
 
 
-router.get('/create', async(req,res)=> {
+router.get('/create', isLoggedIn , async(req,res)=> {
     const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
     );
  
-    res.render('carga.hbs',{articulo: articulo});
+    res.render('contable/carga',{articulo: articulo});
    
 });
 /* revisar por que no redirecciona */
-router.post('/create/articulo', async(req,res)=>{
+router.post('/create/articulo', isLoggedIn , async(req,res)=>{
     
 
     
@@ -52,28 +53,56 @@ router.post('/create/articulo', async(req,res)=>{
 
 //----------------------------------------Inicio (Mostrar articulos)----------------------------------------//
 
-router.get('/inicio', async(req,res)=>{
-    res.render('inicio');
+router.get('/inicio', isLoggedIn, async(req,res)=>{
+    switch(req.user.rol){
+        case 1:
+        res.render('inicio/inicio');
+        break;
+        case 2:
+        res.render('inicio/inicioContable');
+        break;
+        case 3:
+        res.render('inicio/inicioDefensor');
+        break;
+        case 4:
+        res.render('inicio/inicioEmpleado');
+        break;
+        case 5:
+        res.render('inicio/inicioResponsable');
+        break;
+    }
+
 });
 
-router.get('/stock', async(req,res)=>{
+/* poner roles */
+router.get('/stock', isLoggedIn , async(req,res)=>{
     const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
     );
+
+    switch(req.user.rol){
+        case 2:
+            res.render('contable/stock',{articulo: articulo});
+        break;
+
+        case 3:
+            res.render('defensor/stock',{articulo: articulo});
+        break;
+    }
    
-    res.render('stock',{articulo: articulo});
+
 })
 
 
 //----------------------------------------Metodo insertar----------------------------------------//
 
-router.get('/reposicion', async(req,res)=>{
+router.get('/reposicion', isLoggedIn , async(req,res)=>{
     const articulo =await conexion.query('SELECT * FROM articulo'
     );
 
-    res.render('reposicion.hbs', {articulo: articulo});
+    res.render('contable/reposicion', {articulo: articulo});
 });
 
-router.post('/reposicion', async(req,res)=>{
+router.post('/reposicion', isLoggedIn , async(req,res)=>{
 
         req.body.pedidos = JSON.parse(req.body.pedidos);
 
@@ -132,7 +161,7 @@ router.post('/reposicion', async(req,res)=>{
         
         }
 
-        res.redirect('reposicion');
+        res.redirect('contable/reposicion');
         
     });
 
@@ -143,7 +172,15 @@ router.post('/reposicion', async(req,res)=>{
 //----------------------------------------Metodo modificar----------------------------------------//
             /* Revisar */
 
-router.put('/edit/articulo', async(req,res)=>{
+router.get('/edit/articulo', isLoggedIn , async(req,res)=>{
+
+    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.id_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
+    );
+
+    res.render('articulo/articuloEdit', {articulo: articulo});
+})
+
+router.post('/edit/articulo', isLoggedIn , async(req,res)=>{
     let id=req.params.id;
     let nombre=req.body.nombre;
     let categoria=req.body.categoria;
@@ -161,7 +198,9 @@ router.put('/edit/articulo', async(req,res)=>{
     });
 });
 
-router.get('/pedido', async(req,res)=>{
+
+
+router.get('/pedido', isLoggedIn , async(req,res)=>{
         let area= req.user.area;
         let pedido=await conexion.query('SELECT p.fecha_peticion fecha , u.nombre, u.apellido, e.nombre_estado estado, a.nombre_articulo articulo FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion = p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON pa.id_articulo = a.id_articulo JOIN estado e ON pa.estado= e.id_estado WHERE u.area=' + area);
     (err,results)=>{
@@ -171,25 +210,66 @@ router.get('/pedido', async(req,res)=>{
         }else{
             
         }
-    };
-    res.render('pedido',{pedido: pedido});
-/* 
-    SELECT p.fecha_peticion fecha , u.nombre, u.apellido, pa.estado, a.nombre_articulo articulo FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion = p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON pa.id_articulo = a.id_articulo WHERE u.area = 1; */
-    
 
-   
-   
+
+    };
+    switch(req.user.rol){
+            
+        case 1:
+            res.render('admin/pedido',{pedido: pedido});
+        break;
+
+        case 2:
+            res.render('contable/pedido',{pedido: pedido});
+        break;
+
+        case 3:
+            res.render('defensor/pedido',{pedido: pedido});
+        break;
+
+        case 4:
+            res.render('empleado/pedido',{pedido: pedido});
+        break;
+
+        case 5:
+            res.render('responsable/pedido',{pedido: pedido});
+        break;
+    }
+/* 
+    SELECT p.fecha_peticion fecha , u.nombre, u.apellido, pa.estado, a.nombre_articulo articulo FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion = p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON pa.id_articulo = a.id_articulo WHERE u.area = 1; */  
 });
 
 
-router.get('/pedidoUsuario', async(req,res)=>{
+router.get('/pedidoUsuario', isLoggedIn , async(req,res)=>{
         const articulo =await conexion.query('SELECT * FROM articulo'
         );
+
+        switch(req.user.rol){
+            
+            case 1:
+                res.render('admin/pedidoUsuario',{articulo: articulo});
+            break;
+    
+            case 2:
+                res.render('contable/pedidoUsuario',{articulo: articulo});
+            break;
+    
+            case 3:
+                res.render('defensor/pedidoUsuario',{articulo: articulo});
+            break;
+    
+            case 4:
+                res.render('empleado/pedidoUsuario',{articulo: articulo});
+            break;
+    
+            case 5:
+                res.render('responsable/pedidoUsuario',{articulo: articulo});
+            break;
+        }
        
-        res.render('pedidoUsuario',{articulo: articulo});
     });
 
-router.post('/pedidoUsuario', async (req,res)=>{
+router.post('/pedidoUsuario', isLoggedIn , async (req,res)=>{
     req.body.pedidos = JSON.parse(req.body.pedidos);
     let pedido = req.body.pedidos;
     /* generar la peticion */
@@ -248,22 +328,42 @@ router.post('/pedidoUsuario', async (req,res)=>{
 
 })
 
-    router.get('/usuario', async(req,res)=>{
-        const usuario =await conexion.query('SELECT u.rol, u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.id_area AS area, a.id_area FROM usuario u JOIN area a ON u.area = a.id_area'
+    router.get('/usuario', isLoggedIn , async(req,res)=>{
+        const usuario =await conexion.query('SELECT u.rol, u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.id_area AS area, a.id_area FROM usuario u JOIN area a ON u.area = a.id_area WHERE estado_usuario = 0'
         );
-       
-        res.render('user/usuario',{usuario: usuario});
+       if (req.user.rol == 1){
+
+           res.render('admin/usuario',{usuario: usuario});
+       }else{
+        res.redirect('back');
+       }
     });
-/* Error al cargar el logo de defensoria */
-    router.get('/historial/carga', async (req,res)=>{
+
+
+
+
+    router.get('/historial/carga', isLoggedIn , async (req,res)=>{
         let rol = req.user.rol;
-        if (rol != 5 || rol!= 4){
+        const historial =await conexion.query('SELECT a.nombre_articulo, h.stock_inicial, h.modificacion, h.stock_final, u.nombre, u.apellido, h.fecha FROM historial h JOIN usuario u ON h.username = u.username JOIN articulo a ON h.id_articulo= a.id_articulo');
+        switch (rol){
+            case 1 :
+            res.render('admin/historialcarga', {historial: historial});
+            break
+            case 2 :
+            res.render('contable/historialcarga', {historial: historial});
+            break
+            case 3 :
+            res.render('defensor/historialcarga', {historial: historial});
+            break
+        }
+        
+/*         if (rol != 5 || rol!= 4){
             const historial =await conexion.query('SELECT a.nombre_articulo, h.stock_inicial, h.modificacion, h.stock_final, u.nombre, u.apellido, h.fecha FROM historial h JOIN usuario u ON h.username = u.username JOIN articulo a ON h.id_articulo= a.id_articulo');
             res.render('historialcarga', {historial: historial});
         }else{
             const historial =await conexion.query('SELECT a.nombre_articulo, h.stock_inicial, h.modificacion, h.stock_final, u.nombre, u.apellido, h.fecha FROM historial h JOIN usuario u ON h.username = u.username JOIN articulo a ON h.id_articulo= a.id_articulo WHERE u.area='+ req.user.area);
             res.render('historialcarga', {historial: historial});
-        }
+        } */
 
     });
 module.exports = router;

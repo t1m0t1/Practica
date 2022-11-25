@@ -1,4 +1,4 @@
-{{>navegacion}}
+{{>navegacionContable}}
 <div class="pb-3"> 
 
 
@@ -92,7 +92,20 @@
                         </tr>
                     </thead>
 
-                    {{>tabla}}
+<tbody>
+                    {{#each historial}}
+                        
+                     <tr class="">
+                        <td> {{nombre_articulo}} </td>
+                        <td> {{stock_inicial}} </td>
+                        <td> {{modificacion}} </td>
+                        <td> {{stock_final}} </td>
+                        <td> {{nombre}} &nbsp; {{apellido}}  </td>
+                        <td>  {{timeAgo fecha}} </td>
+
+                        </tr>
+                    {{/each}}
+                </tbody>
 
                     </table>
             </div>

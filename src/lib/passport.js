@@ -47,7 +47,7 @@ passport.use('local.signup', new LocalStrategy({
     rol: req.body.rol
   };
 
-  console.log(newUser)
+
   newUser.password = await helpers.encryptPassword(password);
   
   // Saving in the Database

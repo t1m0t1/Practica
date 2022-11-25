@@ -3,11 +3,12 @@ const router = express.Router();
 const path = require ('path');
 const conexion  = require ('../js/conexion_slq');
 const bodyParser = require('body-parser');
+const { isLoggedIn } = require('../lib/auth');
 
 router.post("", async(req, res)=>{});
 
 router.get("/pedido/res", async(req, res)=>{
-
+    if (req.user.rol == 5){
     let peticion = {};
     const area = req.user.area;
     console.log(area);
@@ -65,12 +66,15 @@ router.get("/pedido/res", async(req, res)=>{
    }
 
 
-    res.render("respuesta", {peticion:peticion, contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
+    res.render("responsable/respuesta", {peticion:peticion, contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
         atencionAlPublico: atencionAlPublico, recursosHumanos:recursosHumanos, personalLimpieza:personalLimpieza,
         logistica:logistica, niniez:niniez, relacionesPublicas:relacionesPublicas, despacho:despacho});
+    }else{
+        res.redirect('back');
+    }
 });
 
-router.post("/pedido/res", async(req, res)=>{
+router.post("/pedido/res", isLoggedIn , async(req, res)=>{
     let username= req.user.username;
 
     req.body.pedidos = JSON.parse(req.body.pedidos);
@@ -100,8 +104,12 @@ router.post("/pedido/res", async(req, res)=>{
 
 });
 
-router.get("/pedido/aut", async(req, res)=>{
-   const peticion = await conexion.query('SELECT a.nombre_articulo, a.cantidad AS stock, pa.cantidad, pa.id_peticion_articulo, p.fecha_peticion, p.estado, u.nombre , u.apellido, ar.nombre AS nombre_area, ar.id_area, p.id_peticion FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion=p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON a.id_articulo = pa.id_articulo JOIN area ar ON ar.id_area = u.area WHERE p.estado=1 AND pa.estado=1');
+router.get("/pedido/aut", isLoggedIn , async(req, res)=>{
+    if (req.user.rol == 2){
+
+    
+  
+    const peticion = await conexion.query('SELECT a.nombre_articulo, a.cantidad AS stock, pa.cantidad, pa.id_peticion_articulo, p.fecha_peticion, p.estado, u.nombre , u.apellido, ar.nombre AS nombre_area, ar.id_area, p.id_peticion FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion=p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON a.id_articulo = pa.id_articulo JOIN area ar ON ar.id_area = u.area WHERE p.estado=1 AND pa.estado=1');
 
 
     const sistemas= [];
@@ -147,12 +155,15 @@ router.get("/pedido/aut", async(req, res)=>{
         }
     }
 
-    res.render("autorizacion", {peticion:peticion, contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
+    res.render("contable/autorizacion", {peticion:peticion, contable: contable, sistemas: sistemas, legales: legales, tramites: tramites,
         atencionAlPublico: atencionAlPublico, recursosHumanos:recursosHumanos, personalLimpieza:personalLimpieza,
         logistica:logistica, niniez:niniez, relacionesPublicas:relacionesPublicas, despacho:despacho});
+    }else{
+        res.redirect('back');
+    }
 });
 
-router.post("/pedido/aut", async(req, res)=>{
+router.post("/pedido/aut", isLoggedIn , async(req, res)=>{
     req.body.pedidos = JSON.parse(req.body.pedidos);
     let pedido = req.body.pedidos;
 

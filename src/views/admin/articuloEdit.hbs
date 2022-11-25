@@ -1,0 +1,196 @@
+{{>navegacion}}
+
+<div class="m-3">
+    <table id="myTable" class="table table-secondary table-striped">
+                    <thead>
+                        <tr class="table-dark bg-gradient ">
+
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Sector</th>
+                        <th scope="col">Punto de Reposicion</th>
+                        <th scope="col"></th>
+                        
+
+                        </tr>
+                    </thead>
+
+                <tbody>
+                    {{#each articulo}}
+                        
+                     <tr class="">
+                        <td scope="row">{{id_articulo}}</td>
+                        <td class="cambiarLetra"> {{nombre_articulo}} </td>
+                        <td class="cambiarLetra"> {{nombre}} </td>
+                        <td class="cambiarLetra"> {{cantidad}} </td>
+                        <td class="cambiarLetra"> {{nombre_sector}} </td>
+                        <td class="cambiarLetra"> {{punto_reposicion}} </td>
+                        <td>
+
+                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Editar" onclick="modalEdit({{@key}})">
+                        <input class="btn btn-sm btn-secondary text-light" type="button" value="Eliminar" onclick="modalEliminar({{@key}})">
+                        </td>
+
+                        </tr>
+                    {{/each}}
+                </tbody>
+
+                    </table>
+</div>
+
+
+{{!-- Modal para editar --}}
+<div class="modal" tabindex="-1" id="editModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="cerrarEdit()"></button>
+      </div>
+      <div class="modal-body" id="mensajeEdit">
+        <form class=" pt-5" action="/usuario/edit" method="post">
+
+                        <div class="col-auto">
+                            <div class="col-auto">
+                                <label class="col-md-5" for="idArticulo" hidden>id</label>
+                                <input name="idArticulo" id="idArticulo"  minlength="7" maxlength="8" class="form-control col-md-4" type="text" value="" >
+                            </div>
+            
+                                <div class="col-auto">
+                                    <label class="form-label " for="nombre">Nombre</label>
+                                    <input name="nombre" id="nombre" class="form-control" type="text" value="">
+                                </div>
+
+                                <div class="col-auto">
+                                    <label class="form-label " for="">Categoria</label>
+                                    <input name="categoria" id="categoria" class="form-control" type="text" value="">
+                                </div>
+            
+                            <div class="col-auto">
+                                <label class="col-md-5 " for="">Cantidad</label>
+                                <input name="cantidad" id="cantidad" class="form-control" type="text" value="">
+                            </div>
+                            
+                            <div class="col-auto">
+                                <label class="col-md-5 " for="sector">Sector</label>
+                                 <select class="form-control col-md-4" name="sector" id="sector">
+                                    <option value="" selected id="sectorS">Seleccionar</option>
+                                    <option value="3">Limpieza</option>
+                                    <option value="1">Contable</option>
+                                    <option value="2">Sistema</option>
+                                </select>
+                            </div>                        
+                            <div class="col-auto">
+                                <label class="col-md-5 " for="">Punto de Reposicion</label>
+                                <input name="repo" id="repo" class="form-control" type="text" value="">
+                            </div>                        
+                            <!-- botones -->
+                            <div class="pb-5">
+
+                                <button type="submit" class="btn btn-primary mt-4 ms-auto">Confirmar</button>
+            
+                            </div>
+
+                        </div>
+            
+                    </form>
+      </div>
+      <div class="modal-footer">
+
+    <button type="button" class="btn btn-secondary popover-test" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarEdit()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Modale Para Eliminar --}}
+<div class="modal" tabindex="-1" id="deleteModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrar usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarDelete()"></button>
+      </div>
+      <div class="modal-body form-control" id="mensajeDelete">
+
+      </div>
+
+      <div class="modal-footer">
+        <form action="/usuario/delete" method="POST">
+        <input type="number" name="id_usuario" id="inputKey" value="" hidden>
+    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Cerrar">Eliminar</button>
+        </form>
+    <button type="button" class="btn btn-secondary popover-test" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarDelete()">Cerrar</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const articulo = {{{ json articulo }}};
+
+
+    const modalEliminar =(key)=>{
+     
+      mensajeDelete.innerHTML +=
+                    `  
+            <p id="parrafo">¿Esta seguro que desea eliminar el articulo ${articulo[key].nombre_articulo}?</p>
+            `
+          let id = document.getElementById("inputKey");
+          id.value = articulo[key].id_articulo;
+
+        $("#deleteModal").show();
+    }
+    
+    
+    const cerrarDelete =()=>{
+
+     let node = document.getElementById("parrafo");
+                node.parentNode.removeChild(node);
+
+        $("#deleteModal").hide();
+    }
+
+
+
+   const modalEdit =(key)=>{
+     
+
+
+          const formulario = document.getElementById("formulario");
+          
+          const id = document.getElementById("idArticulo");
+          id.value = articulo[key].id_articulo;
+         
+
+          const nombre= document.getElementById("nombre");
+          nombre.value = articulo[key].nombre_articulo;
+
+          const categoria= document.getElementById("categoria");
+          categoria.value = articulo[key].nombre;
+
+          const cantidad= document.getElementById("cantidad");
+          cantidad.value = articulo[key].cantidad;
+
+          const sector= document.getElementById("sectorS");
+          sector.value = articulo[key].id_sector;
+
+          const repo= document.getElementById("repo");
+          repo.value = articulo[key].punto_reposicion;
+
+
+
+
+        $("#editModal").show();
+    }
+    const cerrarEdit =()=>{
+
+
+
+        $("#editModal").hide();
+    }
+
+</script>

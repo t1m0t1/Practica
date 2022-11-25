@@ -1,0 +1,32 @@
+{{>navegacionResponsable}}
+
+<div>
+    <table id="myTable" class="table table-secondary table-striped ">
+                    <thead>
+                        <tr class="table-dark bg-gradient ">
+
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nombre del Articulo</th>
+                        <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+
+                <tbody>
+                    {{#each pedido}}
+                        
+                     <tr class="">
+                        
+                        
+                        <td> {{timeAgo fecha_peticion}} </td>
+                        <td> {{nombre}} {{apellido}} </td>
+                        <td> {{articulo}} </td>
+                        <td> {{estado}} </td>
+                    
+
+                        </tr>
+                    {{/each}}
+                </tbody>
+
+                    </table>
+</div>

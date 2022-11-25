@@ -5,13 +5,7 @@
     <div class="iconos">
         <div class="cont-linea">
 
-        <div class="dropdown" id="usuario">
-        <button class="btn-dropdown"><img title="Usuario" class="icono icono1 img-fluid" src="/img/icon/usuario.png" alt=""></button>
-        <div class="dropdown-conent">
-            <a href="/user/usuarioAlta" class="dropdown-item">Alta de usuario</a>
-            <a href="/usuario" class="dropdown-item">Administrar usuario</a>
-        </div>
-        </div>
+
 
         <div class="dropdown" id="carga">
             <button class="btn-dropdown"><img title="Stock" class="icono icono2 img-fluid" src="/img/icon/stock.png" alt="" ></button>
@@ -48,12 +42,6 @@
             </div>
         </div>
 
-        <div class="dropdown" id="res">
-            <button class="btn-dropdown"><img title="Respuesta" class="icono icono3 img-fluid" src="/img/icon/respuesta.png" alt=""></button>
-            <div class="dropdown-conent">
-                <a href="/pedido/res" class="dropdown-item">Respuesta</a>
-            </div>
-        </div>
         </div>
     </div>
 <div id="logoDefeBlanco"><img id="logoDefe" src="/img/defensoriablanco.png" alt=""> <img src="/img/barra.png" alt="" style="margin-left 2rem; height: 9rem;"></div>
@@ -63,51 +51,3 @@
 
 
 
- {{!-- <script type="text/javascript">
-      $(document).ready(function () {
-        let usuario = document.getElementById("usuario");
-        let carga = document.getElementById("carga");
-        let historial = document.getElementById("historial");
-        let pedido = document.getElementById("pedido");
-        let aut = document.getElementById("aut");
-        let res = document.getElementById("res");
-        let altaPedido = document.getElementById("reaPedido");
-
-        let altaProducto = document.getElementById("altaProducto");
-        let repo = document.getElementById("repo");
-
-
-
-
-        switch ({{user.rol}}){
-        
-        case 1:
-        carga.remove();
-        historial.remove();
-        pedido.remove();
-        aut.remove();
-        res.remove();
-        break;
-        
-        case 2:
-        usuario.remove();
-        break;
-
-        case 3:
-{{!--         usuario.remove();
-        aut.remove();
-        res.remove();
-
-        altaProducto.remove();
-        repo.remove(); --}}
-        break;
-        case 4:
-
-        break;
-        case 5:
-
-        break;
-    }
-} );
-</script>
- --}}

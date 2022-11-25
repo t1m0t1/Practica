@@ -1,0 +1,135 @@
+{{>navegacionContable}}
+
+<div class="container-fluid">
+  <div class="row"><h3 class=" text-center text-light">Pedido</h3>
+                                                {{!-- Contenedor de tabla --}}
+<div class="col table-resposive">
+                                <table id="myTable" class="table table-dark table-striped">
+                    <thead>
+                        <tr class="table-dark ">
+
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Catidad &nbsp; Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                                       {{#each articulo}}
+                        
+                     <tr class="">
+                        <td> {{id_articulo}} </td>
+                        <td> {{nombre_articulo}} </td>
+                        <td> {{categoria_articulo}} </td>
+                        
+                        <td>
+                            <input class="col-3" min="0" type="number" name="cantidad-agregar" id="cantidad-agregar{{@key}}" > 
+                            <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar" 
+                            onclick="addArticulos({{ @key }})">Agregar</a>
+                        </td>
+
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                    </table>
+</div>
+{{!-- Contenedor de la lista --}}
+<div class="col-5 table-responsive pt-4 mt-5">
+<table class="table table-dark table-striped mt-2">
+        <thead>
+                 <tr class="table-dark ">
+
+                 <th scope="col">ID</th> 
+                 <th scope="col">Nombre</th> 
+                 <th scope="col">Cantidad</th>
+
+                </tr>
+            </thead>
+            <tbody id="contenido-tabla">
+
+            </tbody>
+</table>
+
+            <form action="/pedidoUsuario" method="POST">
+            <input type="hidden" value="" name="pedidos" id="pedidos">
+        
+        <button type="submit" onclick="confirmar()">Confirmar</button>
+        </form>
+
+</div>
+</div>  
+</div>
+
+
+                 <script>
+            
+         const arrArticulos = {{{json articulo}}};
+        
+         const pedidos=[];
+         const addArticulos = (key) =>{
+            
+
+            const existente= pedidos.find ((pedido) =>{
+                return pedido.id === arrArticulos[key].id_articulo;
+
+            });
+
+            if (existente === undefined) {
+
+                const cantidad= document.getElementById('cantidad-agregar'+ key).value;
+                
+                console.log(cantidad);
+
+            
+                {{!-- buscar valor mediante @key --}}
+                 
+
+                const pedido= {
+                id: arrArticulos[key].id_articulo,
+                nombre: arrArticulos[key].nombre_articulo,
+                cantidad: cantidad
+            };
+            
+             pedidos.push(pedido);
+             console.log(pedidos)
+             console.log(pedido.cantidad)
+            }else{
+                alert(`${arrArticulos[key].nombre_articulo} ya a sido añadido al pedido`)
+            }
+
+                const tabla = document.getElementById('contenido-tabla');
+                tabla.innerHTML= '';
+        
+        for (let i=0; i<pedidos.length; i++) {
+            tabla.innerHTML += 
+            `  
+            <tr>
+                <td>${pedidos[i].id}</td>
+                <td>${pedidos[i].nombre}</td>
+                <td>${pedidos[i].cantidad}</td>
+            </tr>
+            `
+
+            ;
+        }
+
+       
+        
+        }           
+
+         const confirmar= ()=>{
+            if (pedidos.length > 0){
+                const inputPedidos = document.getElementById('pedidos');
+                inputPedidos.value = JSON.stringify(pedidos);
+
+
+            
+            }else{
+                alert('Por favor seleccione un articulo')
+            }
+         }
+
+        
+        
+                </script>

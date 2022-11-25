@@ -1,13 +1,5 @@
-{{>navegacion}}
+{{>navegacionContable}}
 
-<!--div que contenga una tabla con los campos
-    fecha de carga  Nombre  Cantidad    Area    Responsable
--->
-<!--Para filtra por
-Area    Responsable     Fecha de carga
--->
-<!--Buscador por nombre de producto-->
-<!-- -->
 <div class=" border-dark">
     <div class="container">
 
@@ -23,7 +15,20 @@ Area    Responsable     Fecha de carga
                 <!-- Boton que despliegue una ventana con info del movimiento -->
             </tr>
         </thead>
-            {{>historialCarga}}
+            <tbody>
+                    {{#each historial}}
+                        
+                     <tr class="">
+                        <td> {{nombre_articulo}} </td>
+                        <td> {{stock_inicial}} </td>
+                        <td> {{modificacion}} </td>
+                        <td> {{stock_final}} </td>
+                        <td> {{nombre}} &nbsp; {{apellido}}  </td>
+                        <td>  {{timeAgo fecha}} </td>
+
+                        </tr>
+                    {{/each}}
+                </tbody>
         </table>
     </div>
 

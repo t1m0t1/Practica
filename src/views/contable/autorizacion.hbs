@@ -1,0 +1,850 @@
+{{>navegacionContable}}
+<div class="m-4">
+    <div class="row">
+<div id="contenedorPedidos" class="col table-resposive ms-3" hidden>
+
+
+
+  </div>
+
+  <div id="contenedorAut" class="col-5 table-responsive pt-4 mt-5" hidden>
+            <table class="table table-dark table-striped mt-2">
+
+                    <thead>
+          <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Estado</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Accion</th>
+          </tr>
+          </thead>
+
+                <tbody id="contenido-tabla">
+
+                </tbody>
+
+            </table>
+            <form action="/pedido/aut" method="POST">
+                <input type="hidden" value="" name="pedidos" id="pedidos">
+
+                <button type="submit" onclick="confirmar()">Confirmar</button>
+            </form>
+
+        </div>
+  </div>
+  </div>
+
+<div id="contenedorTarjetas">
+<div class="row row-cols-1 row-cols-md-4">
+
+  <div class="col" style="margin-bottom: 1rem;">
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div class="linea">
+        <h5 class="card-title text-center text-light">Sistemas</h5>
+        <span class="numerador">{{sistemas.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/informatica.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(1)">Revisar </button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Contable</h5>
+        <span class="numerador">{{contable.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/contables.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(2)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Tramite</h5>
+        <span class="numerador">{{tramites.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/tramites.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(4)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Recursos Humanos</h5>
+        <span class="numerador">{{recursosHumanos.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/archivo.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(6)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" >
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Legales</h5>
+        <span class="numerador">{{legales.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/legales.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(3)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Atencion al Publico</h5>
+        <span class="numerador">{{atencionAlPublico.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/atencion.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(5)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col" >
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Personal y Limpieza</h5>
+        <span class="numerador">{{personalLimpieza.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/personal.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(7)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col" >
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Logistica</h5>
+        <span class="numerador">{{logistica.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/logistica.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(8)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col" >
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Niñez</h5>
+        <span class="numerador">{{niniez.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/niniez.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(9)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col" >
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Relaciones Publicas</h5>
+        <span class="numerador">{{relacionesPublicas.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/prensa.png" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(10)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col" >
+    <div class="card card-area">
+      <div class="tarjeta">
+        <div>
+        <h5 class="card-title text-center text-light">Despacho</h5>
+        <span class="numerador">{{despacho.length}}</span>
+        </div>
+        
+      <img src="/img/iconos-areas/despacho.jpg" class="card-img-top" alt="...">
+        <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" onclick="mostrarPedidos(11)">Revisar</button>
+    </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+      
+
+<script>
+    const arrArticulos = {{{ json peticion }}};
+    const pedidos = [];
+    const addArticulos = (key) => {
+
+
+        const existente = pedidos.find((pedido) => {
+            return pedido.id === arrArticulos[key].id_peticion_articulo;
+
+        });
+
+        if (existente === undefined) {
+
+            const cantidad = document.getElementById('cantidad-agregar' + key).value;
+
+          if (cantidad <= arrArticulos[key].cantidad && cantidad <= arrArticulos[key].stock) {
+
+            const pedido = {
+                id: arrArticulos[key].id_peticion_articulo,
+                nombre: arrArticulos[key].nombre,
+                apellido: arrArticulos[key].apellido,
+                nombreArticulo: arrArticulos[key].nombre_articulo,
+                cantidad: cantidad
+            };
+
+            pedidos.push(pedido);
+          } else {
+            alert(`${arrArticulos[key].nombre_articulo} La cantidad autorizada es mayor a la disponible`)
+          }
+
+        } else {
+            alert(`${arrArticulos[key].nombre_articulo} ya a sido añadido al pedido`)
+        }
+
+        const tabla = document.getElementById('contenido-tabla');
+        tabla.innerHTML = '';
+
+        for (let i = 0; i < pedidos.length; i++) {
+            if (pedidos[i].id != undefined) {
+                tabla.innerHTML +=
+                    `  
+            <tr id="tr-${i}">
+                <td>${pedidos[i].id}</td>
+                <td>${pedidos[i].nombre} ${pedidos[i].apellido}</td>
+                <td>${pedidos[i].nombreArticulo}</td>
+                <td>${pedidos[i].cantidad}</td>
+                <td><a class="btn btn-sm btn-outline-succes text-light" id="boton-borrar" 
+                            onclick="borrarArticulos(${i})">Borrar</a></td>
+            </tr>
+            `
+
+                    ;
+            }
+        };
+
+
+
+    }
+
+    const borrarArticulos = (key) => {
+        for (let i = 0; i < pedidos.length; i++) {
+            if (i == key) {
+                pedidos[i] = {};
+                let node = document.getElementById("tr-" + i);
+                node.parentNode.removeChild(node);
+            }
+        }
+    }
+
+        const confirmar = () => {
+        if (pedidos.length > 0) {
+            const inputPedidos = document.getElementById('pedidos');
+            inputPedidos.value = JSON.stringify(pedidos);
+
+
+
+        } else {
+            alert('Por favor seleccione un articulo')
+        }
+    }
+
+const mostrarPedidos =(id_area)=>{
+     
+    let contenedor = document.getElementById("contenedorPedidos");
+    let contenedorTarjetas = document.getElementById("contenedorTarjetas");
+    let contenedorAut = document.getElementById("contenedorAut");
+    
+    
+
+    if(contenedor.hidden){
+        contenedor.hidden = false;
+        contenedorAut.hidden = false;
+        contenedorTarjetas.hidden = true;
+
+    }else{
+        contenedor.hidden = true;
+        contenedorAut.hidden = true;
+        contenedorTarjetas.hidden = false;
+    }
+
+     switch (id_area){
+      case 1:
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each sistemas}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 2:
+
+{{!--     if ($('#contenedorPedidos').is(':empty')) --}}
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each contable}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+    
+      
+      break;
+      case 3:
+      contenedorPedidos.innerHTML +=
+    
+                      `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each legales}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 4:
+      contenedorPedidos.innerHTML +=
+    
+                   `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each tramites}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 5:
+      contenedorPedidos.innerHTML +=
+    
+                   `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each atencionAlPublico}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 6:
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each recursosHumanos}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 7:
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each personalLimpieza}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 8:
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each logistica}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 9:
+            contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each niniez}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 10:
+            contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each relacionesPublicas}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+      case 11:
+      contenedorPedidos.innerHTML +=
+    
+                    `  
+                    <div id="tabla">
+
+                    <button class="btn-cerrar" onclick="cerrarVentana()">Cerrar</button>
+        <table class="table table-dark table-striped" >
+        <thead>
+          <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Articulo</th>
+          <th>Estado</th>
+          <th>Cantidad Requerida</th>
+          <th>Disponible</th>
+          <th>Cantidad a Autorizar</th>
+          <th>Autorizar</th>
+          </tr>
+          </thead>
+
+        
+            <tbody>
+            {{#each despacho}}
+                      <tr id="items">
+          <td> {{id_peticion_articulo}} </td>
+          <td> {{timeAgo fecha_peticion}} </td>
+          <td> {{nombre}} {{apellido}} </td>
+          <td> {{nombre_articulo}} </td>
+          <td> {{estado}} </td>
+          <td> {{cantidad}} </td>
+          <td> {{stock}} </td>
+          <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
+                            id="cantidad-agregar{{@key}}"> </td>
+          <td> <a class="btn btn-sm btn-outline-succes text-light" id="boton-agregar"
+                            onclick="addArticulos({{ @key }})">Agregar</a> </td>
+                      </tr>
+            {{/each}}
+            
+          </tbody>  
+      </table>
+                    </div>
+            `
+      break;
+     }
+
+
+
+}
+
+const cerrarVentana =()=>{
+    let contenedor = document.getElementById("contenedorPedidos");
+    let contenedorTarjetas = document.getElementById("contenedorTarjetas");
+    let contenedorAut = document.getElementById("contenedorAut");
+
+      $("#tabla").remove();
+
+      if(contenedor.hidden){
+        contenedor.hidden = false;
+        contenedorAut.hidden = false;
+        contenedorTarjetas.hidden = true;
+        
+
+        
+    }else{
+        contenedor.hidden = true;
+        contenedorAut.hidden = true;
+        contenedorTarjetas.hidden = false;
+       
+    }
+      
+}
+
+</script>

@@ -21,7 +21,13 @@ router.post('/', passport.authenticate('local.signin', {
 
 // SINGUP
 router.get('/user/usuarioAlta', (req, res) => {
-  res.render('user/usuarioAlta');
+  if(req.user.rol == 1){
+
+    res.render('admin/usuarioAlta');
+  }else{
+    res.redirect('back')
+  }
+
 });
 
 
@@ -70,7 +76,7 @@ router.get('/logout', function(req, res){
   });
 });
 
-router.get('/inicio', isLoggedIn, (req, res) => {
+router.get('/inicio', isLoggedIn , (req, res) => {
   res.render('inicio');
 });
 

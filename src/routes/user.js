@@ -3,11 +3,12 @@ const router = express.Router();
 const path = require ('path');
 const conexion  = require ('../js/conexion_slq');
 const bodyParser = require('body-parser');
+const { isLoggedIn } = require('../lib/auth');
 
 
 
 
-router.post("/usuario/delete", async(req, res)=>{
+router.post("/usuario/delete", isLoggedIn, async(req, res)=>{
     let id= req.body.id_usuario;
     await conexion.query("UPDATE usuario SET estado_usuario =1 WHERE id_usuario="+id);
     (err,results)=>{
@@ -23,7 +24,7 @@ router.post("/usuario/delete", async(req, res)=>{
     res.redirect("/usuario")
 });
 
-router.post("/usuario/edit", async(req, res)=>{
+router.post("/usuario/edit", isLoggedIn, async(req, res)=>{
 
     let idUser= req.body.idusuario;
     let nombre= req.body.nombre;

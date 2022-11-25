@@ -12,15 +12,40 @@
     <div class="container-fluid">
 
         <ul class="navbar-nav me-auto">
-            
-          <li class=" nav-item dropdown" id="usuario">
+            <li class="nav-item" id="stock">
+                <a href="/stock" class="fw-bold nav-link active">Stock</a>
+            </li>
+
+            <li class="nav-item dropdown" id="carga">
                 <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                    aria-haspopup="true" aria-expanded="false">ADMIN</a>
+                    aria-haspopup="true" aria-expanded="false">Ingreso</a>
                 <div class="dropdown-menu">
-                    <a href="/user/usuarioAlta" class="dropdown-item">Alta de usuario</a>
-                    <a href="/usuario" class="dropdown-item">Administrar usuario</a>
-                    <a href="/edit/articulo" class="dropdown-item">Administrar articulos</a>
+                    <a href="/create" class="dropdown-item">Alta de producto</a>
+                    <a href="/reposicion" class="dropdown-item">Reposicion</a>
                 </div>
+            </li>
+
+            <li class="nav-item dropdown" id="historial">
+                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Historial</a>
+                <div class="dropdown-menu">
+                    <a href="/historial/carga" class="dropdown-item">Historial de Ingresos</a>
+
+                </div>
+
+            </li>
+
+            <li class=" nav-item dropdown" id="pedido">
+                <a href="" class="fw-bold nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Pedidos</a>
+                <div class="dropdown-menu">
+                    <a href="/pedido" class="dropdown-item">Estado de pedido</a>
+                    <a href="/pedidoUsuario" class="dropdown-item" id="reaPedido">Realizar pedido</a>
+                </div>
+
+            </li>
+            <li class="nav-item" id="aut">
+                <a href="/pedido/aut" class="fw-bold nav-link ">Autorizacion</a>
             </li>
         </ul>
 

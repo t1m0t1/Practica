@@ -1,0 +1,41 @@
+{{>navegacionResponsable}}
+<div class="vh-100 ">
+
+    <div class="container">
+        <div class="row">
+            <div class="col table-responsive">
+                        <!-- Tabla -->
+                <table id="myTable" class="table table-secondary table-striped ">
+
+                    <thead>
+                        <tr class="table-dark bg-gradient ">
+
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Sector</th>
+                        <th scope="col">Punto de Reposicion</th>
+                        </tr>
+                    </thead>
+
+                <tbody>
+                    {{#each articulo}}
+                        
+                     <tr class="">
+                        <td scope="row">{{id_articulo}}</td>
+                        <td class="cambiarLetra"> {{nombre_articulo}} </td>
+                        <td class="cambiarLetra"> {{nombre}} </td>
+                        <td class="cambiarLetra"> {{cantidad}} </td>
+                        <td class="cambiarLetra"> {{nombre_sector}} </td>
+                        <td class="cambiarLetra"> {{punto_reposicion}} </td>
+
+                        </tr>
+                    {{/each}}
+                </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

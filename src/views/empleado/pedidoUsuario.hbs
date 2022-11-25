@@ -1,4 +1,4 @@
-{{>navegacion}}
+{{>navegacionEmpleado}}
 
 <div class="container-fluid">
   <div class="row"><h3 class=" text-center text-light">Pedido</h3>
@@ -14,6 +14,8 @@
                         <th scope="col">Catidad &nbsp; Accion</th>
                         </tr>
                     </thead>
+                    <tbody>
+
                                        {{#each articulo}}
                         
                      <tr class="">
@@ -29,6 +31,7 @@
 
                         </tr>
                     {{/each}}
+                    </tbody>
                     </table>
 </div>
 {{!-- Contenedor de la lista --}}
