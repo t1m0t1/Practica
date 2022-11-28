@@ -21,12 +21,9 @@ router.post('/', passport.authenticate('local.signin', {
 
 // SINGUP
 router.get('/user/usuarioAlta', (req, res) => {
-  if(req.user.rol == 1){
+ 
 
     res.render('admin/usuarioAlta');
-  }else{
-    res.redirect('back')
-  }
 
 });
 
@@ -51,12 +48,6 @@ router.post('/user/usuarioAlta',
 ],
 (req, res, next) => {
 
-/*   const data= {username:req.body.username,
-    nombre:req.body.nombre,
-    apellido:req.body.apellido,
-    area:req.body.area,
-    password:req.body.password}; */
-
   passport.authenticate('local.signup', {
     successRedirect: '/inicio',
     failureRedirect: 'usuarioAlta',
@@ -65,10 +56,6 @@ router.post('/user/usuarioAlta',
 
 });
 
-/* router.get('/logout', (req, res) => {
-  req.logOut();
-  res.redirect('/');
-}); */
 router.get('/logout', function(req, res){
   req.logout(function(err) {
     if (err) { return next(err); }
@@ -76,9 +63,7 @@ router.get('/logout', function(req, res){
   });
 });
 
-router.get('/inicio', isLoggedIn , (req, res) => {
-  res.render('inicio');
-});
+
 
 module.exports = router;
 

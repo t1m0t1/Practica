@@ -41,7 +41,7 @@
 </div>
 
 
-{{!-- Modal para editar --}}
+{{!------------------------------ Modal para editar -----------------}}
 <div class="modal" tabindex="-1" id="editModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -50,12 +50,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="cerrarEdit()"></button>
       </div>
       <div class="modal-body" id="mensajeEdit">
-        <form class=" pt-5" action="/usuario/edit" method="post">
+        <form class=" pt-5" action="/edit/articulo" method="post">
 
                         <div class="col-auto">
                             <div class="col-auto">
-                                <label class="col-md-5" for="idArticulo" hidden>id</label>
-                                <input name="idArticulo" id="idArticulo"  minlength="7" maxlength="8" class="form-control col-md-4" type="text" value="" >
+                                <label class="col-md-5" for="" hidden>id</label>
+                                <input name="idArticulo" id="idArticulo"  minlength="7" maxlength="8" class="form-control col-md-4" type="text" value="" hidden>
                             </div>
             
                                 <div class="col-auto">
@@ -64,8 +64,18 @@
                                 </div>
 
                                 <div class="col-auto">
-                                    <label class="form-label " for="">Categoria</label>
-                                    <input name="categoria" id="categoria" class="form-control" type="text" value="">
+                            <div class="col-auto">
+                                <label class="col-md-5 " for="sector">Categoria</label>
+                                 <select class="form-control col-md-4" name="categoria" id="categoria">
+                                    <option value="" selected >Seleccionar</option>
+                                    <option value="1">Informatica</option>
+                                    <option value="2">Comestible</option>
+                                    <option value="3">Limpieza</option>
+                                    <option value="4">Limpieza Lts</option>
+                                    <option value="5">Papeleria</option>
+                                    <option value="6">Libreria</option>
+                                </select>
+                            </div>   
                                 </div>
             
                             <div class="col-auto">
@@ -76,7 +86,7 @@
                             <div class="col-auto">
                                 <label class="col-md-5 " for="sector">Sector</label>
                                  <select class="form-control col-md-4" name="sector" id="sector">
-                                    <option value="" selected id="sectorS">Seleccionar</option>
+                                    <option value="" selected >Seleccionar</option>
                                     <option value="3">Limpieza</option>
                                     <option value="1">Contable</option>
                                     <option value="2">Sistema</option>
@@ -105,7 +115,7 @@
   </div>
 </div>
 
-{{!-- Modale Para Eliminar --}}
+{{!------------------------------ Modale Para Eliminar ----------------------------}}
 <div class="modal" tabindex="-1" id="deleteModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -118,8 +128,8 @@
       </div>
 
       <div class="modal-footer">
-        <form action="/usuario/delete" method="POST">
-        <input type="number" name="id_usuario" id="inputKey" value="" hidden>
+        <form action="/del/articulo" method="POST">
+        <input type="number" name="id" id="id" value="" hidden>
     <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Cerrar">Eliminar</button>
         </form>
     <button type="button" class="btn btn-secondary popover-test" data-bs-dismiss="modal" aria-label="Cerrar" onclick="cerrarDelete()">Cerrar</button>
@@ -139,7 +149,7 @@
                     `  
             <p id="parrafo">¿Esta seguro que desea eliminar el articulo ${articulo[key].nombre_articulo}?</p>
             `
-          let id = document.getElementById("inputKey");
+          let id = document.getElementById("id");
           id.value = articulo[key].id_articulo;
 
         $("#deleteModal").show();
@@ -170,12 +180,12 @@
           nombre.value = articulo[key].nombre_articulo;
 
           const categoria= document.getElementById("categoria");
-          categoria.value = articulo[key].nombre;
+          categoria.value = articulo[key].id_categoria;
 
           const cantidad= document.getElementById("cantidad");
           cantidad.value = articulo[key].cantidad;
 
-          const sector= document.getElementById("sectorS");
+          const sector= document.getElementById("sector");
           sector.value = articulo[key].id_sector;
 
           const repo= document.getElementById("repo");

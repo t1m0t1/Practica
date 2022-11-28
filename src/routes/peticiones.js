@@ -5,7 +5,6 @@ const conexion  = require ('../js/conexion_slq');
 const bodyParser = require('body-parser');
 const { isLoggedIn } = require('../lib/auth');
 
-router.post("", async(req, res)=>{});
 
 router.get("/pedido/res", async(req, res)=>{
     if (req.user.rol == 5){

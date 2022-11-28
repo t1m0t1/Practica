@@ -16,7 +16,7 @@ router.use(express.urlencoded());
 
 
 router.get('/create', isLoggedIn , async(req,res)=> {
-    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
+    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector WHERE estado=0'
     );
  
     res.render('contable/carga',{articulo: articulo});
@@ -55,28 +55,31 @@ router.post('/create/articulo', isLoggedIn , async(req,res)=>{
 
 router.get('/inicio', isLoggedIn, async(req,res)=>{
     switch(req.user.rol){
-        case 1:
-        res.render('inicio/inicio');
-        break;
-        case 2:
-        res.render('inicio/inicioContable');
-        break;
-        case 3:
-        res.render('inicio/inicioDefensor');
-        break;
-        case 4:
-        res.render('inicio/inicioEmpleado');
-        break;
-        case 5:
-        res.render('inicio/inicioResponsable');
-        break;
-    }
+      case 1:
+      res.render('inicio/inicio');
+      break;
+      case 2:
+      res.render('inicio/inicioContable');
+      break;
+      case 3:
+      res.render('inicio/inicioDefensor');
+      break;
+      case 4:
+      res.render('inicio/inicioEmpleado');
+      break;
+      case 5:
+      res.render('inicio/inicioResponsable');
+      break;
+      default:
+      res.redirect('back');
+      break;
+  }
 
 });
 
 /* poner roles */
 router.get('/stock', isLoggedIn , async(req,res)=>{
-    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
+    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector WHERE estado=0'
     );
 
     switch(req.user.rol){
@@ -96,7 +99,7 @@ router.get('/stock', isLoggedIn , async(req,res)=>{
 //----------------------------------------Metodo insertar----------------------------------------//
 
 router.get('/reposicion', isLoggedIn , async(req,res)=>{
-    const articulo =await conexion.query('SELECT * FROM articulo'
+    const articulo =await conexion.query('SELECT * FROM articulo WHERE estado=0'
     );
 
     res.render('contable/reposicion', {articulo: articulo});
@@ -161,7 +164,7 @@ router.post('/reposicion', isLoggedIn , async(req,res)=>{
         
         }
 
-        res.redirect('contable/reposicion');
+        res.redirect('reposicion');
         
     });
 
@@ -173,31 +176,55 @@ router.post('/reposicion', isLoggedIn , async(req,res)=>{
             /* Revisar */
 
 router.get('/edit/articulo', isLoggedIn , async(req,res)=>{
-
-    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, a.cantidad, a.punto_reposicion, s.id_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector '
+    if (req.user.rol == 1){
+    const articulo =await conexion.query('SELECT a.id_articulo, a.nombre_articulo, c.nombre, c.id_categoria, a.cantidad, a.punto_reposicion, s.id_sector, s.nombre_sector FROM articulo a JOIN categoria c ON a.categoria_articulo = c.id_categoria JOIN sector s ON a.sector = s.id_sector WHERE estado = 0'
     );
+    
+    res.render('admin/articuloEdit', {articulo: articulo});
+    }else{
+        res.redirect('back');
+    }
+});
 
-    res.render('articulo/articuloEdit', {articulo: articulo});
-})
 
 router.post('/edit/articulo', isLoggedIn , async(req,res)=>{
-    let id=req.params.id;
+    let id=req.body.idArticulo;
     let nombre=req.body.nombre;
     let categoria=req.body.categoria;
     let cantidad=req.body.cantidad;
-    let reposicion=req.body.reposicion;
-    let sql= "UPDATE articulo SET nombre_articulo= ?, categoria_articulo=?, cantidad=?, punto_reposicion=? WHERE id=?"
+    let sector=req.body.sector;
+    let reposicion=req.body.repo;
+    let sql= "UPDATE articulo SET nombre_articulo= ?, categoria_articulo=?, cantidad=?, sector= ?, punto_reposicion=? WHERE id_articulo=?"
 
-    await conexion.query(sql,[nombre,categoria,cantidad,reposicion,id],function(err,results){
+    await conexion.query(sql,[nombre,categoria,cantidad,sector,reposicion,id],function(err,results){
         if(err){
             throw err;
         }else{
-            res.send(results);
+            res.redirect('/edit/articulo')
 
         }
     });
 });
 
+router.post('/del/articulo', isLoggedIn , async(req,res)=>{
+
+    
+    if (req.user.rol == 1){
+    let id = req.body.id;
+
+    await conexion.query('UPDATE articulo SET estado = 1 WHERE id_articulo ='+id);
+
+    (err,results)=>{
+        if(err){
+            
+            throw err;
+        }};
+    
+        res.redirect('back');
+    }else{
+        res.redirect('back');
+    }
+});
 
 
 router.get('/pedido', isLoggedIn , async(req,res)=>{
@@ -210,7 +237,6 @@ router.get('/pedido', isLoggedIn , async(req,res)=>{
         }else{
             
         }
-
 
     };
     switch(req.user.rol){
@@ -329,7 +355,7 @@ router.post('/pedidoUsuario', isLoggedIn , async (req,res)=>{
 })
 
     router.get('/usuario', isLoggedIn , async(req,res)=>{
-        const usuario =await conexion.query('SELECT u.rol, u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.id_area AS area, a.id_area FROM usuario u JOIN area a ON u.area = a.id_area WHERE estado_usuario = 0'
+        const usuario =await conexion.query('SELECT u.rol, u.id_usuario, u.username, u.nombre AS nombreUsuario, u.apellido, a.id_area AS area, a.nombre AS nombreArea, a.id_area FROM usuario u JOIN area a ON u.area = a.id_area WHERE estado_usuario = 0'
         );
        if (req.user.rol == 1){
 
