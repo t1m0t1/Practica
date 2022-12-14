@@ -29,7 +29,21 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+.encabezado{
+    height: 4rem;
+    width: 100%;
+    background-image: url('/img/bandera.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.encabezado h1{
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-shadow: -2px 2px 4px black;
+    text-align: center;
 
+}
 .dropdown{
     display: inline-block;
     position: relative;
@@ -81,6 +95,14 @@ select{
 
 .navegacion{
     height: auto;
+}
+
+.logout{
+    position: absolute;
+    z-index: 2;
+    right: 1rem;
+    top: 1rem;
+
 }
 
 .imgInicio{
@@ -147,7 +169,7 @@ select{
     right: 8%;
     position: absolute;
     height: 2rem;
-    width: 25rem;
+    width: 27rem;
     
 
     

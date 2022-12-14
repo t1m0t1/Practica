@@ -1,4 +1,5 @@
 {{>navegacionContable}}
+<div class="encabezado"><h1>Alta de Producto</h1></div>
 <div class="pb-3"> 
 
 
@@ -9,7 +10,6 @@
 
             <div class="row  justify-content-center align-items-center">
                 <div class="col-sm-4">
-    <h1 class="text-center text-light ">alta de producto</h1>
              <form method="POST" action="/create/articulo" > 
  
              <div class="col-auto">
@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col" >
                         <!-- Tabla -->
-                                <table id="myTable" class="table table-secondary table-striped">
+                                <table data-order='[[ 1, "asc" ]]'  id="myTable" class="table table-secondary table-striped">
                     <thead>
                         <tr class="table-dark bg-gradient ">
 
@@ -93,15 +93,15 @@
                     </thead>
 
 <tbody>
-                    {{#each historial}}
+                    {{#each articulo}}
                         
                      <tr class="">
-                        <td> {{nombre_articulo}} </td>
-                        <td> {{stock_inicial}} </td>
-                        <td> {{modificacion}} </td>
-                        <td> {{stock_final}} </td>
-                        <td> {{nombre}} &nbsp; {{apellido}}  </td>
-                        <td>  {{timeAgo fecha}} </td>
+                        <td scope="row">{{id_articulo}}</td>
+                        <td class="cambiarLetra"> {{nombre_articulo}} </td>
+                        <td class="cambiarLetra"> {{nombre}} </td>
+                        <td class="cambiarLetra"> {{cantidad}} </td>
+                        <td class="cambiarLetra"> {{nombre_sector}} </td>
+                        <td class="cambiarLetra"> {{punto_reposicion}} </td>
 
                         </tr>
                     {{/each}}

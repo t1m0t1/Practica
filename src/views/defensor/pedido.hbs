@@ -1,7 +1,7 @@
 {{>navegacionDefensor}}
-
+<div class="encabezado"><h1>Estado de Pedido</h1></div>
 <div>
-    <table id="myTable" class="table table-secondary table-striped ">
+    <table data-order='[[ 0, "desc" ]]' id="myTable" class="table table-secondary table-striped ">
                     <thead>
                         <tr class="table-dark bg-gradient ">
 
@@ -18,7 +18,7 @@
                      <tr class="">
                         
                         
-                        <td> {{timeAgo fecha_peticion}} </td>
+                        <td> {{timeAgo fecha}} </td>
                         <td> {{nombre}} {{apellido}} </td>
                         <td> {{articulo}} </td>
                         <td> {{estado}} </td>

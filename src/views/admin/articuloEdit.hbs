@@ -1,7 +1,7 @@
 {{>navegacion}}
-
+<div class="encabezado"><h1>Administracion de Articulos</h1></div>
 <div class="m-3">
-    <table id="myTable" class="table table-secondary table-striped">
+    <table data-order='[[ 1, "asc" ]]' id="myTable" class="table table-secondary table-striped">
                     <thead>
                         <tr class="table-dark bg-gradient ">
 
@@ -46,7 +46,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Editar Usuario</h5>
+        <h5 class="modal-title">Editar Articulo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="cerrarEdit()"></button>
       </div>
       <div class="modal-body" id="mensajeEdit">
@@ -78,7 +78,7 @@
                             </div>   
                                 </div>
             
-                            <div class="col-auto">
+                            <div class="col-auto" hidden>
                                 <label class="col-md-5 " for="">Cantidad</label>
                                 <input name="cantidad" id="cantidad" class="form-control" type="text" value="">
                             </div>

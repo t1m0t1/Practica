@@ -10,7 +10,7 @@ router.get("/pedido/res", async(req, res)=>{
     if (req.user.rol == 5){
     let peticion = {};
     const area = req.user.area;
-    console.log(area);
+
    if (area == 1){
     peticion = await conexion.query('SELECT a.id_articulo, a.nombre_articulo, a.cantidad AS stock, pa.cantidad, pa.id_peticion_articulo, p.fecha_peticion, p.estado, u.nombre , u.apellido, ar.nombre AS nombre_area, ar.id_area, p.id_peticion FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion=p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON a.id_articulo = pa.id_articulo JOIN area ar ON ar.id_area = u.area WHERE pa.estado=2 AND a.sector = 2');
    }else{
@@ -21,6 +21,7 @@ router.get("/pedido/res", async(req, res)=>{
        }
 
    }
+
    const sistemas= [];
    const contable= [];
    const legales= [];
@@ -35,7 +36,7 @@ router.get("/pedido/res", async(req, res)=>{
 
 
    for (let i=0; i< peticion.length; i++ ){
-       if (peticion.estado = 1){
+       if (peticion.estado = 2){
 
            switch (peticion[i].id_area){
                case 1: sistemas.push(peticion[i]); 
@@ -79,24 +80,34 @@ router.post("/pedido/res", isLoggedIn , async(req, res)=>{
     req.body.pedidos = JSON.parse(req.body.pedidos);
     let pedido = req.body.pedidos;
 
+    console.log(pedido)
     for (let i=0;i< pedido.length; i++){
-        let cantidad_actual= await conexion.query('SELECT cantidad FROM articulo WHERE id_articulo =' + pedido[i].id_articulo);
-        const peticion_articulo =await conexion.query ("UPDATE peticion_articulo SET estado = 3 WHERE id_peticion_articulo = " + pedido[i].id_peticion_articulo);
-        cantidad_actual=JSON.stringify(cantidad_actual)
-        cantidad_actual=JSON.parse(cantidad_actual)
-
-
-        const historial=await conexion.query ("INSERT historial (id_articulo ,stock_inicial ,modificacion, stock_final, username, tipo) VALUES ("+pedido[i].id_articulo +","  +cantidad_actual[0].cantidad + " ,"+pedido[i].cantidad+ " ,"+(cantidad_actual[0].cantidad - pedido[i].cantidad)+ " ,"+username+ ", 2);");
         
-        const articulo =await conexion.query ("UPDATE articulo SET cantidad = cantidad -"+pedido[i].cantidad + " WHERE id_articulo = "+ pedido[i].id_articulo);
-        (err,results)=>{
-                            
-            if(err){
-                console.log(err)
-                throw err;
-            }else{
-                
-            }}
+        console.log(pedido[i].id_peticion_articulo)
+        
+        if(pedido[i].cantidad > 0){
+
+            let cantidad_actual= await conexion.query('SELECT cantidad FROM articulo WHERE id_articulo =' + pedido[i].id_articulo);
+            const peticion_articulo =await conexion.query ("UPDATE peticion_articulo SET estado = 3 WHERE id_peticion_articulo = " + pedido[i].id_peticion_articulo);
+            
+            cantidad_actual=JSON.stringify(cantidad_actual)
+            cantidad_actual=JSON.parse(cantidad_actual)
+    
+    
+            const historial=await conexion.query ("INSERT historial (id_articulo ,stock_inicial ,modificacion, stock_final, username, tipo) VALUES ("+pedido[i].id_articulo +","  +cantidad_actual[0].cantidad + " ,-"+pedido[i].cantidad+ " ,"+(cantidad_actual[0].cantidad - pedido[i].cantidad)+ " ,"+username+ ", 2);");
+            
+            const articulo =await conexion.query ("UPDATE articulo SET cantidad = cantidad -"+pedido[i].cantidad + " WHERE id_articulo = "+ pedido[i].id_articulo);
+            (err,results)=>{
+                                
+                if(err){
+                    console.log(err)
+                    throw err;
+                }else{
+                    
+                }}
+        }else{
+            const peticion_articulo =await conexion.query ("UPDATE peticion_articulo SET estado = 4 WHERE id_peticion_articulo = " + pedido[i].id_peticion_articulo);
+        }
     }
 
     res.redirect('/pedido/res');
@@ -167,8 +178,13 @@ router.post("/pedido/aut", isLoggedIn , async(req, res)=>{
     let pedido = req.body.pedidos;
 
     for (let i=0; i< pedido.length; i++){
-        
-        const actualizacion= await conexion.query('UPDATE peticion_articulo SET estado = ' + 2 +' , cantidad= ' + pedido[i].cantidad + ' ' + 'WHERE id_peticion_articulo =' + pedido[i].id)
+        if(pedido[i].cantidad > 0){
+
+            const actualizacion= await conexion.query('UPDATE peticion_articulo SET estado = ' + 2 +' , cantidad= ' + pedido[i].cantidad + ' ' + 'WHERE id_peticion_articulo =' + pedido[i].id)
+        }else{
+            const actualizacion= await conexion.query('UPDATE peticion_articulo SET estado = ' + 4 +' , cantidad= ' + pedido[i].cantidad + ' ' + 'WHERE id_peticion_articulo =' + pedido[i].id)
+
+        }
     }
 
     res.redirect('/pedido/aut');

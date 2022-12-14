@@ -1,4 +1,5 @@
 {{>navegacionContable}}
+<div class="encabezado"><h1>Autorizacion de Pedidos</h1></div>
 <div class="m-4">
     <div class="row">
 <div id="contenedorPedidos" class="col table-resposive ms-3" hidden>
@@ -12,9 +13,8 @@
 
                     <thead>
           <tr>
-          <th>ID</th>
+
           <th>Usuario</th>
-          <th>Estado</th>
           <th>Cantidad a Autorizar</th>
           <th>Accion</th>
           </tr>
@@ -28,7 +28,7 @@
             <form action="/pedido/aut" method="POST">
                 <input type="hidden" value="" name="pedidos" id="pedidos">
 
-                <button type="submit" onclick="confirmar()">Confirmar</button>
+                <button type="submit" id="btnConfirmar" onclick="confirmar()" hidden>Confirmar</button>
             </form>
 
         </div>
@@ -221,6 +221,7 @@
 <script>
     const arrArticulos = {{{ json peticion }}};
     const pedidos = [];
+    var indice= 0;
     const addArticulos = (key) => {
 
 
@@ -233,6 +234,15 @@
 
             const cantidad = document.getElementById('cantidad-agregar' + key).value;
 
+           indice++;
+
+            if (indice == 0){
+            let btnConfirmar= document.getElementById("btnConfirmar");                
+            btnConfirmar.hidden = true;
+            }else{
+                btnConfirmar.hidden= false;
+            }
+          
           if (cantidad <= arrArticulos[key].cantidad && cantidad <= arrArticulos[key].stock) {
 
             const pedido = {
@@ -245,7 +255,7 @@
 
             pedidos.push(pedido);
           } else {
-            alert(`${arrArticulos[key].nombre_articulo} La cantidad autorizada es mayor a la disponible`)
+            alert(`${arrArticulos[key].nombre_articulo} La cantidad autorizada es mayor a la requerida`)
           }
 
         } else {
@@ -260,7 +270,7 @@
                 tabla.innerHTML +=
                     `  
             <tr id="tr-${i}">
-                <td>${pedidos[i].id}</td>
+                
                 <td>${pedidos[i].nombre} ${pedidos[i].apellido}</td>
                 <td>${pedidos[i].nombreArticulo}</td>
                 <td>${pedidos[i].cantidad}</td>
@@ -283,6 +293,15 @@
                 pedidos[i] = {};
                 let node = document.getElementById("tr-" + i);
                 node.parentNode.removeChild(node);
+
+                indice--;
+
+            if (indice == 0){
+            let btnConfirmar= document.getElementById("btnConfirmar");                
+            btnConfirmar.hidden = true;
+            }else{
+                btnConfirmar.hidden= false;
+            }
             }
         }
     }
@@ -329,11 +348,10 @@ const mostrarPedidos =(id_area)=>{
         <table class="table table-dark table-striped" >
         <thead>
           <tr>
-          <th>ID</th>
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -349,7 +367,6 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -380,7 +397,6 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -396,7 +412,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+    
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -427,7 +443,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+ 
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -443,7 +459,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+  
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -472,7 +488,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+  
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -488,7 +504,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+ 
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -517,7 +533,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+   
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -533,7 +549,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+      
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -562,7 +578,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+      
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -578,7 +594,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+     
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -607,7 +623,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+      
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -623,7 +639,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+  
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -652,7 +668,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+   
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -668,7 +684,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+       
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -697,7 +713,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+    
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -713,7 +729,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+     
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -742,7 +758,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -758,7 +774,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+  
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"
@@ -787,7 +803,7 @@ const mostrarPedidos =(id_area)=>{
           <th>Fecha</th>
           <th>Usuario</th>
           <th>Articulo</th>
-          <th>Estado</th>
+     
           <th>Cantidad Requerida</th>
           <th>Disponible</th>
           <th>Cantidad a Autorizar</th>
@@ -803,7 +819,7 @@ const mostrarPedidos =(id_area)=>{
           <td> {{timeAgo fecha_peticion}} </td>
           <td> {{nombre}} {{apellido}} </td>
           <td> {{nombre_articulo}} </td>
-          <td> {{estado}} </td>
+    
           <td> {{cantidad}} </td>
           <td> {{stock}} </td>
           <td> <input class="col-5" type="number" min="0" name="cantidad-agregar"

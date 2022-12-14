@@ -1,4 +1,5 @@
 {{>navegacionResponsable}}
+<div class="encabezado"><h1>Entrega de Articulos</h1></div>
 <div style="display: flex;">
     <div class="contenedorRes">
         {{!-- tarjeta --}}
@@ -18,7 +19,7 @@
 </button>
 
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(2)">
     
         <div class="fondoTarjRes" id="fondoTar2">
             <div class="tarjetaRes" id="tar2">
@@ -31,7 +32,7 @@
         </div>
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(3)">
 
         <div class="fondoTarjRes" id="fondoTar3">
             <div class="tarjetaRes" id="tar3">
@@ -44,7 +45,7 @@
         </div>
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(4)">
 
         <div class="fondoTarjRes" id="fondoTar4">
             <div class="tarjetaRes" id="tar4">
@@ -57,7 +58,7 @@
         </div>
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(5)">
 
         <div class="fondoTarjRes" id="fondoTar5">
             <div class="tarjetaRes" id="tar5">
@@ -70,7 +71,7 @@
         </div>
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(6)">
     
         <div class="fondoTarjRes" id="fondoTar6">
             <div class="tarjetaRes" id="tar6">
@@ -83,7 +84,7 @@
         </div>
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(7)">
 
         <div class="fondoTarjRes" id="fondoTar7">
             <div class="tarjetaRes" id="tar7">
@@ -95,7 +96,7 @@
             </div>
         </div>
 </button>
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(8)">
     
         <div class="fondoTarjRes" id="fondoTar8">
             <div class="tarjetaRes" id="tar8">
@@ -108,7 +109,7 @@
         </div>
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(9)">
         <div class="fondoTarjRes" id="fondoTar9">
             <div class="tarjetaRes" id="tar9">
 
@@ -121,7 +122,7 @@
     
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(10)">
     
         <div class="fondoTarjRes" id="fondoTar10">
             <div class="tarjetaRes" id="tar10">
@@ -135,7 +136,7 @@
 
 </button>
 
-<button class="btnRes">
+<button class="btnRes" onclick="mostrarPedidos(11)">
     
         <div class="fondoTarjRes" id="fondoTar11">
             <div class="tarjetaRes" id="tar11">
@@ -147,19 +148,20 @@
             </div>
         </div>
 
-    </div>
 </button>
+    </div>
 
 
     <div class="contenedorItems">
         <table class="table table-dark table-striped">
             <thead>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Usuario</th>{{!-- Nombre y apellido --}}
+                
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Usuario</th>
                 <th>Articulo</th>
                 <th>Cantidad Autorizada</th>
                 <th></th>
+        
             </thead>
             <tbody id="contenidoTabla">
 
@@ -187,34 +189,55 @@ const confirmar= ()=>{
  const mostrarPedidos= (area)=>{
     
     const tabla = document.getElementById("contenidoTabla");
+    const inputPedidos = document.getElementById('pedidos');
 
 
     switch (area){
         case 1:
-        const pedidos = {{{json sistemas}}};
-        const inputPedidos = document.getElementById('pedidos');
-        inputPedidos.value = JSON.stringify(pedidos);
-        console.log(inputPedidos.value);
+
+        inputPedidos.value = JSON.stringify({{{json sistemas}}});
 
          contenidoTabla.innerHTML =
          `
         {{#each sistemas}}
                 <tr>
-                <td>{{id_articulo}}</td>
+                
                 <td>{{timeAgo fecha_peticion}}</td>
                 <td>{{nombre}} {{apellido}}</td>
                 <td>{{nombre_articulo}}</td>
                 <td class="text-center">{{cantidad}}</td>
-                <td><input type="checkbox" name="" id=""></td>
+                <td class="text-center"><input type="checkbox" name="" id=""></td>
                 </tr>
                 {{/each}}
                 `
         break;
         
         case 2:
+        inputPedidos.value = JSON.stringify({{{json contable}}});
+        console.log(inputPedidos.value);
+
+
         contenidoTabla.innerHTML =
          `
         {{#each contable}}
+                <tr>
+                
+                
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td class="text-center">{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td class="text-center">{{cantidad}}</td>
+                <td><input type="checkbox" name="" id=""></td>
+                </tr>
+                {{/each}}`
+        break;
+
+        case 3:
+        inputPedidos.value = JSON.stringify({{{json legales}}});
+
+        contenidoTabla.innerHTML =
+                 `
+        {{#each legales}}
                 <tr>
                 <td>{{id_articulo}}</td>
                 <td>{{timeAgo fecha_peticion}}</td>
@@ -225,34 +248,124 @@ const confirmar= ()=>{
                 {{/each}}`
         break;
 
-        case 3:
-        break;
-
         case 4:
-        break;
-        
-        case 4:
+        inputPedidos.value = JSON.stringify({{{json tramites}}});
+        contenidoTabla.innerHTML =
+                 `
+        {{#each tramites}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 5:
+        inputPedidos.value = JSON.stringify({{{json antencionAlPublico}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each atencionAlPublico}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 6:
+        inputPedidos.value = JSON.stringify({{{json recursosHumanos}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each recursosHumanos}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 7:
+        inputPedidos.value = JSON.stringify({{{json personalLimpieza}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each personalLimpieza}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 8:
+        inputPedidos.value = JSON.stringify({{{json logistica}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each logistica}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 9:
+        inputPedidos.value = JSON.stringify({{{json niniez}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each niniez}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 10:
+        inputPedidos.value = JSON.stringify({{{json relacionesPublicas}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each relacionesPublicas}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
         case 11:
+        inputPedidos.value = JSON.stringify({{{json despacho}}});
+                contenidoTabla.innerHTML =
+                 `
+        {{#each despacho}}
+                <tr>
+                <td>{{id_articulo}}</td>
+                <td>{{timeAgo fecha_peticion}}</td>
+                <td>{{nombre}} {{apellido}}</td>
+                <td>{{nombre_articulo}}</td>
+                <td>{{cantidad}}</td>
+                </tr>
+                {{/each}}`
         break;
         
     }

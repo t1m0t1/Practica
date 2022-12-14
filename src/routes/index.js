@@ -126,13 +126,13 @@ router.post('/reposicion', isLoggedIn , async(req,res)=>{
                     }else{
                         
                     }}
-                    console.log(pedido[i].cantidad)
+                    console.log(typeof parseInt(pedido[i].cantidad))
                     cantidad_actual=JSON.stringify(cantidad_actual)
                     cantidad_actual=JSON.parse(cantidad_actual)
-                    
+                    console.log(typeof cantidad_actual[0].cantidad);
 
                 /*Calcuular el stock final*/
-                let stock_final = cantidad_actual[0].cantidad - pedido[i].cantidad;
+                let stock_final = cantidad_actual[0].cantidad + parseInt(pedido[i].cantidad);
 
                     /* Se insertan los valores a la tabla historal */
                 await conexion.query('INSERT INTO historial (id_articulo,stock_inicial,modificacion,stock_final,username) VALUES ('
@@ -160,6 +160,7 @@ router.post('/reposicion', isLoggedIn , async(req,res)=>{
         }else{
             console.log("no salio");
             console.log(pedido[i]);
+            
         }
         
         }
@@ -230,7 +231,8 @@ router.post('/del/articulo', isLoggedIn , async(req,res)=>{
 router.get('/pedido', isLoggedIn , async(req,res)=>{
         let area= req.user.area;
         let pedido=await conexion.query('SELECT p.fecha_peticion fecha , u.nombre, u.apellido, e.nombre_estado estado, a.nombre_articulo articulo FROM peticion_articulo pa JOIN peticion p ON pa.id_peticion = p.id_peticion JOIN usuario u ON p.username = u.username JOIN articulo a ON pa.id_articulo = a.id_articulo JOIN estado e ON pa.estado= e.id_estado WHERE u.area=' + area);
-    (err,results)=>{
+
+        (err,results)=>{
         if(err){
             
             throw err;

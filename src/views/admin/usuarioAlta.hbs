@@ -1,4 +1,5 @@
 {{>navegacion}}
+<div class="encabezado"><h1>Alta de Usuarios</h1></div>
     <div>
         <div class="container">
                 <h3 class="text-center text-light">Alta de Usuario</h3>
@@ -22,9 +23,17 @@
                                 <label class="col-md-5 text-light" for="">Area</label>
                                 <select class="form-control col-md-4" name="area">
                                     <option value="null" selected>Seleccionar</option>
-                                    <option value="3">legales</option>
-                                    <option value="2">Contable</option>
                                     <option value="1">Sistema</option>
+                                    <option value="2">Contable</option>
+                                    <option value="3">Legales</option>
+                                    <option value="4">Tramites</option>
+                                    <option value="5">Atencion al Publico</option>
+                                    <option value="6">Recursos Humanos</option>
+                                    <option value="7">Personal Limpieza</option>
+                                    <option value="8">Logistica</option>
+                                    <option value="9">Niñez</option>
+                                    <option value="10">Relaciones Publicas</option>
+                                    <option value="11">Despacho</option>
                                 </select>
                             </div>
                             
@@ -50,7 +59,7 @@
                                 <input name="password" class="form-control col-md-4" type="password">
                             </div>
             
-                            <div class="col-auto">
+                            <div class="col-auto" hidden>
                                 <label class="text-light" for="">Confirmar contraseña</label>
                                 <input class="form-control col-md-4" type="password">
                             </div>

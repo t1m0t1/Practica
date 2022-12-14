@@ -4,6 +4,7 @@ const timeagoInstance = timeago;
 
 const helpers = {};
 
+
 helpers.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
@@ -19,7 +20,8 @@ helpers.matchPassword = async (password, savedPassword) => {
 };
 
 helpers.timeAgo = (savedTimestamp) => {  
-  return timeagoInstance.format(savedTimestamp);
+ return savedTimestamp.toLocaleString('en-GB', { timeZone: 'America/Argentina/Buenos_Aires' });
+  /* return timeagoInstance.format(savedTimestamp); */
 };
 
 helpers.colorEstado =    (cantidad , reposicion)=> {if (cantidad > reposicion) {return "table-success";
